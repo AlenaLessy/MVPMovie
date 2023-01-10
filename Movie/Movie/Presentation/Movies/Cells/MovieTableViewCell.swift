@@ -1,9 +1,5 @@
-//
-//  MovieTableViewCell.swift
-//  Movie
-//
-//  Created by Алена Панченко on 25.10.2022.
-//
+// MovieTableViewCell.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -61,6 +57,16 @@ final class MovieTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Public Methods
+
+    func update(movie: Movie, networkService: NetworkService) {
+        movieNameLabel.text = movie.title
+        movieDescriptionLabel.text = movie.overview
+        movieRatingLabel.text = movie.rating.description
+        guard let urlString = movie.posterPath else { return }
+        fetchImage(networkService: networkService, urlString: urlString)
+    }
+
     // MARK: - Private Methods
 
     private func addSubviews() {
@@ -70,12 +76,18 @@ final class MovieTableViewCell: UITableViewCell {
         addSubview(movieRatingLabel)
     }
 
-    func update(_ movie: Movie) {
-        movieNameLabel.text = movie.title
-        movieDescriptionLabel.text = movie.overview
-        movieRatingLabel.text = movie.rating.description
-        guard let url = movie.posterPath else { return }
-        movieImageView.loadImage(urlImage: url)
+    private func fetchImage(networkService: NetworkService, urlString: String) {
+        networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(data):
+                DispatchQueue.main.async {
+                    self.movieImageView.image = UIImage(data: data)
+                }
+            case .failure:
+                print("error")
+            }
+        }
     }
 
     // MARK: - Constrains

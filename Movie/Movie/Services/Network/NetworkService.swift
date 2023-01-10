@@ -1,13 +1,22 @@
-//
-//  NetworkService.swift
-//  Movie
-//
-//  Created by Алена Панченко on 25.10.2022.
-//
+// NetworkService.swift
+// Copyright © RoadMap. All rights reserved.
 
+import Alamofire
 import Foundation
+import SwiftyJSON
 
-final class NetworkService {
+protocol NetworkServiceProtocol {
+    func requestMovies(kind: MovieKind, page: Int, completion: ((Result<MovieResponse, NetworkError>) -> ())?)
+    func requestMovie(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?)
+    func requestRecommendationsMovie(
+        id: Int,
+        completion: ((Result<[RecommendationMovie], NetworkError>) -> ())?
+    )
+    func fetchImage(imageUrlPath: String, completion: ((Result<Data, NetworkError>) -> ())?)
+}
+
+/// Cетевые запросы
+final class NetworkService: NetworkServiceProtocol {
     // MARK: - Private Constants
 
     private enum Constants {
@@ -18,88 +27,69 @@ final class NetworkService {
         static let language = "ru-RU"
         static let queryItemPageName = "page"
         static let htttpMethod = "GET"
-        static let applicationJson = "application/json"
-        static let forHTTPHeaderField = "Content-Type"
         static let movieText = "movie/"
         static let recommendationsText = "/recommendations"
+        static let resultsText = "results"
+        static let baseImageIRLString = "https://image.tmdb.org/t/p/w500"
     }
-
-    // MARK: - Private Properties
-
-    static let shared = NetworkService()
-    private let session = URLSession.shared
-    private let decoder = JSONDecoder()
-
-    // MARK: - Private Init
-
-    private init() {}
 
     // MARK: - Public Methods
 
     func requestMovies(kind: MovieKind, page: Int, completion: ((Result<MovieResponse, NetworkError>) -> ())?) {
-        guard var url = URL(string: Constants.baseUrlString + kind.path) else {
+        guard let url = URL(string: Constants.baseUrlString + kind.path) else {
             completion?(.failure(.urlFailure))
             return
         }
 
-        url.append(queryItems: [
-            URLQueryItem(name: Constants.queryItemApiKeyName, value: Constants.apiKey),
-            URLQueryItem(name: Constants.queryItemLanguageName, value: Constants.language),
-            URLQueryItem(name: Constants.queryItemPageName, value: page.description)
-        ])
+        let parameters = [
+            Constants.queryItemApiKeyName: Constants.apiKey,
+            Constants.queryItemLanguageName: Constants.language,
+            Constants.queryItemPageName: page.description
+        ]
 
-        var request = URLRequest(url: url)
-        request.httpMethod = Constants.htttpMethod
-        request.setValue(Constants.applicationJson, forHTTPHeaderField: Constants.forHTTPHeaderField)
-
-        session.dataTask(with: request) { [weak self] data, _, _ in
-            guard let self else { return }
-            if let data {
-                guard let movieResponse = try? self.decoder.decode(MovieResponse.self, from: data) else {
-                    completion?(.failure(.decodingFailure))
-                    return
-                }
-                completion?(.success(movieResponse))
-            } else {
-                completion?(.failure(.unknown))
+        AF.request(
+            url,
+            method: HTTPMethod(rawValue: Constants.htttpMethod),
+            parameters: parameters
+        ).responseJSON { responseJSON in
+            switch responseJSON.result {
+            case let .success(value):
+                let response = MovieResponse(json: JSON(value))
+                completion?(.success(response))
+            case .failure:
+                completion?(.failure(.decodingFailure))
             }
-        }.resume()
+        }
     }
 
     func requestMovie(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?) {
-        guard var url = URL(string: Constants.baseUrlString + Constants.movieText + id.description) else {
+        guard let url = URL(string: Constants.baseUrlString + Constants.movieText + id.description) else {
             completion?(.failure(.urlFailure))
             return
         }
 
-        url.append(queryItems: [
-            URLQueryItem(name: Constants.queryItemApiKeyName, value: Constants.apiKey),
-            URLQueryItem(name: Constants.queryItemLanguageName, value: Constants.language)
-        ])
+        let parameters = [
+            Constants.queryItemApiKeyName: Constants.apiKey,
+            Constants.queryItemLanguageName: Constants.language
+        ]
 
-        var request = URLRequest(url: url)
-        request.httpMethod = Constants.htttpMethod
-        request.setValue(Constants.applicationJson, forHTTPHeaderField: Constants.forHTTPHeaderField)
-
-        session.dataTask(with: request) { [weak self] data, _, _ in
-            guard let self else { return }
-            guard let data else {
-                completion?(.failure(.unknown))
-                return
+        AF.request(url, method: HTTPMethod(rawValue: Constants.htttpMethod), parameters: parameters)
+            .responseJSON { responseJSON in
+                switch responseJSON.result {
+                case let .success(value):
+                    let response = MovieDetails(json: JSON(value))
+                    completion?(.success(response))
+                case .failure:
+                    completion?(.failure(.decodingFailure))
+                }
             }
-            guard let detail = try? self.decoder.decode(MovieDetails.self, from: data) else {
-                completion?(.failure(.decodingFailure))
-                return
-            }
-            completion?(.success(detail))
-        }.resume()
     }
 
     func requestRecommendationsMovie(
         id: Int,
-        completion: ((Result<RecommendationMovieResponse, NetworkError>) -> ())?
+        completion: ((Result<[RecommendationMovie], NetworkError>) -> ())?
     ) {
-        guard var url = URL(
+        guard let url = URL(
             string: Constants.baseUrlString + Constants.movieText + id.description + Constants
                 .recommendationsText
         ) else {
@@ -107,26 +97,32 @@ final class NetworkService {
             return
         }
 
-        url.append(queryItems: [
-            URLQueryItem(name: Constants.queryItemApiKeyName, value: Constants.apiKey),
-            URLQueryItem(name: Constants.queryItemLanguageName, value: Constants.language)
-        ])
+        let parameters = [
+            Constants.queryItemApiKeyName: Constants.apiKey,
+            Constants.queryItemLanguageName: Constants.language
+        ]
 
-        var request = URLRequest(url: url)
-        request.httpMethod = Constants.htttpMethod
-        request.setValue(Constants.applicationJson, forHTTPHeaderField: Constants.forHTTPHeaderField)
-
-        session.dataTask(with: request) { [weak self] data, _, _ in
-            guard let self else { return }
-            guard let data else {
-                completion?(.failure(.unknown))
-                return
+        AF.request(url, method: HTTPMethod(rawValue: Constants.htttpMethod), parameters: parameters)
+            .responseJSON { responseJSON in
+                switch responseJSON.result {
+                case let .success(value):
+                    let response = JSON(value)[Constants.resultsText].arrayValue.map { RecommendationMovie(json: $0) }
+                    completion?(.success(response))
+                case .failure:
+                    completion?(.failure(.decodingFailure))
+                }
             }
-            guard let detail = try? self.decoder.decode(RecommendationMovieResponse.self, from: data) else {
+    }
+
+    func fetchImage(imageUrlPath: String, completion: ((Result<Data, NetworkError>) -> ())?) {
+        let imageUrl = "\(Constants.baseImageIRLString)\(imageUrlPath)"
+        AF.request(imageUrl).responseData { response in
+            switch response.result {
+            case let .success(data):
+                completion?(.success(data))
+            case let .failure(error):
                 completion?(.failure(.decodingFailure))
-                return
             }
-            completion?(.success(detail))
-        }.resume()
+        }
     }
 }

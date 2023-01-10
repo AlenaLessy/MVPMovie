@@ -1,34 +1,39 @@
-//
-//  MovieDetails.swift
-//  Movie
-//
-//  Created by Алена Панченко on 28.10.2022.
-//
+// MovieDetails.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
+import SwiftyJSON
 
 /// Модель деталей фильма
-struct MovieDetails: Decodable {
-    //
-    enum CodingKeys: String, CodingKey {
-        case posterPath = "backdrop_path"
-        case overview
-        case title
-        case rating = "vote_average"
-        case tagline
-        case releaseDate = "release_date"
-        case runtime
-        case productionCountries = "production_countries"
-        case id
-    }
-
+struct MovieDetails {
+    /// Путь к постеру фильма
     let posterPath: String
+    /// Описание
     let overview: String
+    /// Название
     let title: String
+    /// Райтинг
     let rating: Double
+    /// Слоган фильма
     let tagline: String
+    /// Дата релиза
     let releaseDate: String
+    /// Время фильма
     let runtime: Int
-    let productionCountries: [ProductionCountries]
+    /// Страна производства
+    let productionCountries: [String]
+    /// Id фильма
     let id: Int
+
+    init(json: JSON) {
+        posterPath = json["backdrop_path"].stringValue
+        overview = json["overview"].stringValue
+        title = json["title"].stringValue
+        rating = json["vote_average"].doubleValue
+        tagline = json["tagline"].stringValue
+        releaseDate = json["release_date"].stringValue
+        runtime = json["runtime"].intValue
+        productionCountries = json["production_countries"].arrayValue.map { $0["name"].stringValue }
+        id = json["id"].intValue
+    }
 }

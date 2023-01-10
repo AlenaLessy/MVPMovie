@@ -1,9 +1,5 @@
-//
-//  DetailMovieViewController.swift
-//  Movie
-//
-//  Created by Алена Панченко on 26.10.2022.
-//
+// DetailsMovieViewController.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -14,6 +10,9 @@ class DetailsMovieViewController: UIViewController {
     private enum Constants {
         static let detailsCellIdentifier = "Details"
         static let relatedCellIdentifier = "Relate"
+        static let alertTitleText = "Ой!"
+        static let alertMessageText = "Произошла ошибка(("
+        static let alertActionTitleText = "Ok"
     }
 
     // MARK: - Private Outlets
@@ -26,13 +25,11 @@ class DetailsMovieViewController: UIViewController {
 
     // MARK: Public Properties
 
-    var movieDetails: MovieDetails?
+    var presenter: DetailsMoviePresenterProtocol!
 
-    // MARK: Private Properties
+    // MARK: - Private Properties
 
-    private var recommendationMovies: [RecommendationMovie] = []
-    private var recommendations: [Movie] = []
-    private let networkService = NetworkService.shared
+    private var networkService = NetworkService()
 
     // MARK: - LifeCycle
 
@@ -40,7 +37,6 @@ class DetailsMovieViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         configureTableView()
-        requestMovies()
     }
 
     // MARK: - Private Methods
@@ -49,21 +45,6 @@ class DetailsMovieViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(DetailsMovieTableViewCell.self, forCellReuseIdentifier: Constants.detailsCellIdentifier)
         tableView.showsVerticalScrollIndicator = false
-    }
-
-    private func requestMovies() {
-        networkService.requestRecommendationsMovie(id: movieDetails?.id ?? 0) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case let .success(response):
-                self.recommendationMovies = response.movies
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            case .failure:
-                break
-            }
-        }
     }
 
     // MARK: - Constrains
@@ -88,8 +69,8 @@ extension DetailsMovieViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.detailsCellIdentifier)
             as? DetailsMovieTableViewCell else { return UITableViewCell() }
-        guard let model = movieDetails else { return UITableViewCell() }
-        cell.update(model)
+        guard let model = presenter.movieDetails else { return UITableViewCell() }
+        cell.update(model, networkService: networkService)
         cell.collectionView.register(
             RelatedMoviesCollectionViewCell.self,
             forCellWithReuseIdentifier: Constants.relatedCellIdentifier
@@ -107,20 +88,20 @@ extension DetailsMovieViewController: UITableViewDataSource {
 /// UICollectionViewDataSource
 extension DetailsMovieViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        recommendationMovies.count
+        presenter.recommendationMovies.count
     }
 
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let model = recommendationMovies[indexPath.row]
+        let model = presenter.recommendationMovies[indexPath.row]
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Constants.relatedCellIdentifier,
             for: indexPath
         ) as? RelatedMoviesCollectionViewCell
         else { return UICollectionViewCell() }
-        cell.update(model)
+        cell.update(model, networkService: networkService)
         return cell
     }
 }
@@ -133,5 +114,21 @@ extension DetailsMovieViewController: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         CGSize(width: 150, height: 200)
+    }
+}
+
+/// DetailsMovieViewProtocol
+extension DetailsMovieViewController: DetailsMovieViewProtocol {
+    func reloadTableView() {
+        tableView.reloadData()
+    }
+
+    func failure() {
+        showAlert(
+            title: Constants.alertTitleText,
+            message: Constants.alertMessageText,
+            actionTitle: Constants.alertActionTitleText,
+            handler: nil
+        )
     }
 }

@@ -1,17 +1,15 @@
-//
-//  RecommendationMovie.swift
-//  Movie
-//
-//  Created by Алена Панченко on 28.10.2022.
-//
+// RecommendationMovie.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
+import SwiftyJSON
 
 /// Модель рекомендованного фильма
-struct RecommendationMovie: Decodable {
+struct RecommendationMovie {
+    /// Пусть к постеру фильма
     let posterPath: String?
 
-    enum CodingKeys: String, CodingKey {
-        case posterPath = "poster_path"
+    init(json: JSON) {
+        posterPath = json["poster_path"].stringValue
     }
 }

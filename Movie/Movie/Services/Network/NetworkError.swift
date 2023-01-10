@@ -1,9 +1,5 @@
-//
-//  NetworkError.swift
-//  Movie
-//
-//  Created by Алена Панченко on 28.10.2022.
-//
+// NetworkError.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
 
@@ -12,4 +8,15 @@ enum NetworkError: Error {
     case unknown
     case decodingFailure
     case urlFailure
+
+    var description: String {
+        switch self {
+        case .unknown:
+            return "Неизвестная ошибка"
+        case .decodingFailure:
+            return "Ошибка декодирования"
+        case .urlFailure:
+            return "Ошибка URL"
+        }
+    }
 }

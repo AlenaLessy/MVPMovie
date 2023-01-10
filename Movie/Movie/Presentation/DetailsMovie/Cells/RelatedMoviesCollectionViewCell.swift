@@ -1,9 +1,5 @@
-//
-//  RelatedMoviesCollectionViewCell.swift
-//  Movie
-//
-//  Created by Алена Панченко on 27.10.2022.
-//
+// RelatedMoviesCollectionViewCell.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -39,15 +35,32 @@ final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Public Methods
+
+    func update(_ movie: RecommendationMovie, networkService: NetworkService) {
+        guard let urlString = movie.posterPath else { return }
+        fetchImage(networkService: networkService, urlString: urlString)
+        reloadInputViews()
+    }
+
     // MARK: - Private Methods
 
     private func addSubviews() {
         contentView.addSubview(movieImageView)
     }
 
-    func update(_ movie: RecommendationMovie) {
-        guard let url = movie.posterPath else { return }
-        movieImageView.loadImage(urlImage: url)
+    private func fetchImage(networkService: NetworkService, urlString: String) {
+        networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(data):
+                DispatchQueue.main.async {
+                    self.movieImageView.image = UIImage(data: data)
+                }
+            case .failure:
+                print("error")
+            }
+        }
     }
 
     // MARK: - Constrains

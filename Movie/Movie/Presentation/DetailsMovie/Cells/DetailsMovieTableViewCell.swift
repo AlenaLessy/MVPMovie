@@ -1,9 +1,5 @@
-//
-//  MovieTableViewCell.swift
-//  Movie
-//
-//  Created by Алена Панченко on 26.10.2022.
-//
+// DetailsMovieTableViewCell.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -211,6 +207,20 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Public Methods
+
+    func update(_ movie: MovieDetails, networkService: NetworkService) {
+        movieNameLabel.text = movie.title
+        movieDescriptionLabel.text = movie.overview
+        ratingLabel.text = movie.rating.description
+        currentReleaseDateLabel.text = movie.releaseDate
+        currentTimeLabel.text = "\(movie.runtime.description) мин"
+        guard let countriesName = movie.productionCountries.first
+        else { return }
+        currentCountryIssueLabel.text = countriesName
+        fetchImage(networkService: networkService, urlString: movie.posterPath)
+    }
+
     // MARK: - Private Methods
 
     private func addSubviews() {
@@ -234,15 +244,18 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         backgroundDescriptionView.addSubview(collectionView)
     }
 
-    func update(_ movie: MovieDetails) {
-        movieNameLabel.text = movie.title
-        movieDescriptionLabel.text = movie.overview
-        ratingLabel.text = movie.rating.description
-        currentReleaseDateLabel.text = movie.releaseDate
-        currentTimeLabel.text = "\(movie.runtime.description) мин"
-        guard let countriesName = movie.productionCountries.first?.name else { return }
-        currentCountryIssueLabel.text = countriesName
-        movieImageView.loadImage(urlImage: movie.posterPath)
+    private func fetchImage(networkService: NetworkService, urlString: String) {
+        networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(data):
+                DispatchQueue.main.async {
+                    self.movieImageView.image = UIImage(data: data)
+                }
+            case .failure:
+                print("error")
+            }
+        }
     }
 
     // MARK: - Constrains

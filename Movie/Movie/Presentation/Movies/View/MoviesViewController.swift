@@ -1,9 +1,5 @@
-//
-//  ViewController.swift
-//  Movie
-//
-//  Created by Алена Панченко on 25.10.2022.
-//
+// MoviesViewController.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -15,10 +11,10 @@ final class MoviesViewController: UIViewController {
         static let topRatedButtonTitle = "C лучшим рейтингом"
         static let popularButtonTitle = "Популярное"
         static let upCommingButtonTitle = "Скоро"
-        static let urlFailureText = "urlFailure"
-        static let uncnownFailureText = "Uncnown error"
-        static let decodingFailureText = "decodingFailure"
         static let movieTableCellIdentifier = "MovieTableCell"
+        static let alertTitleText = "Ой!"
+        static let alertMessageText = "Произошла ошибка(("
+        static let alertActionTitleText = "Ok"
     }
 
     // MARK: - Private Outlets
@@ -86,15 +82,13 @@ final class MoviesViewController: UIViewController {
         return tableView
     }()
 
+    // MARK: - Public Properties
+
+    var presenter: MoviesPresenterProtocol!
+
     // MARK: - Private Properties
 
-    private var movies: [Movie] = []
-    private var movieDetails: MovieDetails?
-    private var currentKind: MovieKind = .topRated
-    private let networkService = NetworkService.shared
-    private var page = 1
-    private var totalPages = 1
-    private var isLoading = false
+    private var networkService = NetworkService()
 
     // MARK: - LifeCycle
 
@@ -104,95 +98,19 @@ final class MoviesViewController: UIViewController {
         configureLayoutAnchor()
         configureTableView()
         buttonConfigure()
-        requestMovies(currentKind)
     }
 
     // MARK: - Private Actions
 
     @objc private func refreshControlAction() {
-        page = 1
-        requestMovies(currentKind)
+        presenter.refreshControlAction()
     }
 
     @objc private func buttonAction(_ sender: UIButton) {
-        handleChangedKind(to: sender.accessibilityIdentifier)
+        presenter.handleChangedKind(to: sender.accessibilityIdentifier)
     }
 
     // MARK: - Private Methods
-
-    private func handleChangedKind(to identifier: String?) {
-        guard let identifier,
-              let kind = MovieKind(rawValue: identifier)
-        else { return }
-        scrollToTop()
-        guard currentKind != kind else { return }
-        movies = []
-        movieTableView.reloadData()
-        page = 1
-        currentKind = kind
-        requestMovies(currentKind)
-
-        UIView.animate(withDuration: 0.2) {
-            self.topRatedButton.alpha = kind == .topRated ? 1 : 0.5
-            self.popularButton.alpha = kind == .popular ? 1 : 0.5
-            self.upCommingButton.alpha = kind == .upcoming ? 1 : 0.5
-            self.view.layoutIfNeeded()
-        }
-    }
-
-    private func scrollToTop() {
-        movieTableView.setContentOffset(.zero, animated: true)
-    }
-
-    private func requestMovies(_ kind: MovieKind, pagination: Bool = false) {
-        isLoading = true
-        activityIndicatorView.startAnimating()
-        page = pagination ? page + 1 : page
-
-        networkService.requestMovies(kind: kind, page: page) { [weak self] result in
-            guard let self else { return }
-            self.isLoading = false
-
-            DispatchQueue.main.async {
-                self.activityIndicatorView.stopAnimating()
-                self.refreshControl.endRefreshing()
-            }
-
-            switch result {
-            case let .success(response):
-                self.movies = pagination ? self.movies + response.movies : response.movies
-                self.page = response.page
-                self.totalPages = response.totalPages
-
-                DispatchQueue.main.async {
-                    self.movieTableView.reloadData()
-                }
-            case .failure:
-                break
-            }
-        }
-    }
-
-    private func requestMovieDetails(index: Int) {
-        let movie = movies[index]
-        networkService.requestMovie(id: movie.id) { [weak self] result in
-
-            switch result {
-            case .failure(.urlFailure):
-                print(Constants.urlFailureText)
-            case .failure(.unknown):
-                print(Constants.uncnownFailureText)
-            case .failure(.decodingFailure):
-                print(Constants.decodingFailureText)
-            case let .success(movieDetails):
-                DispatchQueue.main.async {
-                    let detailsMovieViewController = DetailsMovieViewController()
-                    detailsMovieViewController.movieDetails = movieDetails
-                    self?.navigationController?.pushViewController(detailsMovieViewController, animated: true)
-                }
-            }
-        }
-    }
 
     private func buttonConfigure() {
         topRatedButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
@@ -201,7 +119,7 @@ final class MoviesViewController: UIViewController {
     }
 
     private func addSubviews() {
-        let ui = [
+        [
             topRatedButton,
             popularButton,
             upCommingButton,
@@ -273,14 +191,15 @@ final class MoviesViewController: UIViewController {
 /// UITableViewDataSource
 extension MoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        movies.count
+        presenter.movies?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = movies[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.movieTableCellIdentifier)
-            as? MovieTableViewCell else { return UITableViewCell() }
-        cell.update(model)
+            as? MovieTableViewCell,
+            let movie = presenter.movies?[indexPath.row]
+        else { return UITableViewCell() }
+        cell.update(movie: movie, networkService: networkService)
         return cell
     }
 
@@ -296,17 +215,56 @@ extension MoviesViewController: UITableViewDataSource {
         UIView.animate(withDuration: 0.15, delay: 0.15) {
             cell.layer.transform = CATransform3DIdentity
         }
-
-        let isLastCell = indexPath.row == movies.count - 1
-
-        guard isLastCell, !isLoading, !movies.isEmpty else { return }
-        requestMovies(currentKind, pagination: true)
+        presenter.newFetchMovies(to: indexPath.row)
     }
 }
 
 /// UITableViewDelegate
 extension MoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        requestMovieDetails(index: indexPath.row)
+        guard let movieId = presenter.movies?[indexPath.row].id else { return }
+        presenter.tapDetailsMovie(id: movieId)
+    }
+}
+
+/// MoviesViewProtocol
+extension MoviesViewController: MoviesViewProtocol {
+    func setupAlpha() {
+        UIView.animate(withDuration: 0.2) {
+            self.topRatedButton.alpha = self.presenter.topRatedButtonAlpha
+            self.popularButton.alpha = self.presenter.popularButtonAlpha
+            self.upCommingButton.alpha = self.presenter.upcomingButtonAlpha
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    func reloadTableView() {
+        movieTableView.reloadData()
+    }
+
+    func stopActivityIndicatorAndRefreshControl() {
+        activityIndicatorView.stopAnimating()
+        refreshControl.endRefreshing()
+    }
+
+    func startActivityIndicator() {
+        activityIndicatorView.startAnimating()
+    }
+
+    func succes() {
+        movieTableView.reloadData()
+    }
+
+    func failure() {
+        showAlert(
+            title: Constants.alertTitleText,
+            message: Constants.alertMessageText,
+            actionTitle: Constants.alertActionTitleText,
+            handler: nil
+        )
+    }
+
+    func scrollToTop() {
+        movieTableView.setContentOffset(.zero, animated: true)
     }
 }

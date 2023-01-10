@@ -1,9 +1,5 @@
-//
-//  AppDelegate.swift
-//  ElectronicsStore
-//
-//  Created by Алена Панченко on 06.10.2022.
-//
+// AppDelegate.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -29,7 +25,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessionsSet: Set<UISceneSession>) {
-
-    }
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessionsSet: Set<UISceneSession>) {}
 }
