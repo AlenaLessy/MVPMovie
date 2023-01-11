@@ -4,7 +4,7 @@
 import UIKit
 
 /// Роутер экрана фильмов
-class MoviesRouter: MoviesRouterProtocol {
+final class MoviesRouter: MoviesRouterProtocol {
     // MARK: - Public Properties
 
     var navigationController: UINavigationController?

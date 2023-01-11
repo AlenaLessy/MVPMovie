@@ -126,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				57365CC0290835DE00A72B5C /* Application */,
+				57D22F08296E97ED0048F374 /* AssemblyModuleBuilder */,
 				57820E53296E247A0078B38B /* Routers */,
 				57820E46296D76E60078B38B /* Extensions */,
 				57365CC72908366900A72B5C /* Services */,
@@ -140,7 +141,6 @@
 			children = (
 				57365CAA2907C77700A72B5C /* SceneDelegate.swift */,
 				57365CA82907C77700A72B5C /* AppDelegate.swift */,
-				57820E3E296CA4740078B38B /* AssemblyModuleBuilder.swift */,
 				57365CB12907C77900A72B5C /* Assets.xcassets */,
 				57365CB32907C77900A72B5C /* LaunchScreen.storyboard */,
 				57365CB62907C77900A72B5C /* Info.plist */,
@@ -258,6 +258,14 @@
 				57820E54296E249C0078B38B /* BaseRouter.swift */,
 			);
 			path = Routers;
+			sourceTree = "<group>";
+		};
+		57D22F08296E97ED0048F374 /* AssemblyModuleBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				57820E3E296CA4740078B38B /* AssemblyModuleBuilder.swift */,
+			);
+			path = AssemblyModuleBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

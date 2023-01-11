@@ -15,6 +15,23 @@ final class MoviesViewController: UIViewController {
         static let alertTitleText = "Ой!"
         static let alertMessageText = "Произошла ошибка(("
         static let alertActionTitleText = "Ok"
+        static let cornerRadiusButtonValue: CGFloat = 5
+        static let numberOfLinesZero = 0
+        static let reducedAlphaOfButtonValue = 0.5
+        static let buttonsAnimateDuration = 0.2
+        static let tableViewWillDisplayRowDegreeValue = 60
+        static let angel = 180.0
+        static let tableViewRowAnimateDurationValue = 0.15
+        static let tableViewRowAnimateDelayValue = 0.15
+    }
+
+    private enum ConstantsOfConstraint {
+        static let topRatedButtonLeadingOfSafeAreaValue: CGFloat = 10
+        static let buttonHeightValue: CGFloat = 50
+        static let buttonWidthValue: CGFloat = 110
+        static let popularButtonLeadingOfTopRatedButtonValue: CGFloat = 15
+        static let upCommingButtonLeadingOfpopularButtonValue: CGFloat = 15
+        static let movieTableViewTopOftopRatedButtonValue: CGFloat = 20
     }
 
     // MARK: - Private Outlets
@@ -23,11 +40,11 @@ final class MoviesViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .lightGray
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = Constants.cornerRadiusButtonValue
         button.setTitle(Constants.topRatedButtonTitle, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.numberOfLines = Constants.numberOfLinesZero
         button.accessibilityIdentifier = MovieKind.topRated.rawValue
         return button
     }()
@@ -36,13 +53,13 @@ final class MoviesViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .lightGray
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = Constants.cornerRadiusButtonValue
         button.setTitle(Constants.popularButtonTitle, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.setTitleColor(.cyan, for: .selected)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.titleLabel?.numberOfLines = 0
-        button.alpha = 0.5
+        button.titleLabel?.numberOfLines = Constants.numberOfLinesZero
+        button.alpha = Constants.reducedAlphaOfButtonValue
         button.accessibilityIdentifier = MovieKind.popular.rawValue
         return button
     }()
@@ -51,13 +68,13 @@ final class MoviesViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .lightGray
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = Constants.cornerRadiusButtonValue
         button.setTitle(Constants.upCommingButtonTitle, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.setTitleColor(.cyan, for: .selected)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.titleLabel?.numberOfLines = 0
-        button.alpha = 0.5
+        button.titleLabel?.numberOfLines = Constants.numberOfLinesZero
+        button.alpha = Constants.reducedAlphaOfButtonValue
         button.accessibilityIdentifier = MovieKind.upcoming.rawValue
         return button
     }()
@@ -86,10 +103,6 @@ final class MoviesViewController: UIViewController {
 
     var presenter: MoviesPresenterProtocol!
 
-    // MARK: - Private Properties
-
-    private var networkService = NetworkService()
-
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
@@ -100,7 +113,7 @@ final class MoviesViewController: UIViewController {
         buttonConfigure()
     }
 
-    // MARK: - Private Actions
+    // MARK: - Private Methods
 
     @objc private func refreshControlAction() {
         presenter.refreshControlAction()
@@ -109,8 +122,6 @@ final class MoviesViewController: UIViewController {
     @objc private func buttonAction(_ sender: UIButton) {
         presenter.handleChangedKind(to: sender.accessibilityIdentifier)
     }
-
-    // MARK: - Private Methods
 
     private func buttonConfigure() {
         topRatedButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
@@ -146,34 +157,46 @@ final class MoviesViewController: UIViewController {
 
     private func topRatedButtonConstraint() {
         NSLayoutConstraint.activate([
-            topRatedButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            topRatedButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            topRatedButton.heightAnchor.constraint(equalToConstant: 50),
-            topRatedButton.widthAnchor.constraint(equalToConstant: 110)
+            topRatedButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topRatedButton.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: ConstantsOfConstraint.topRatedButtonLeadingOfSafeAreaValue
+            ),
+            topRatedButton.heightAnchor.constraint(equalToConstant: ConstantsOfConstraint.buttonHeightValue),
+            topRatedButton.widthAnchor.constraint(equalToConstant: ConstantsOfConstraint.buttonWidthValue)
         ])
     }
 
     private func popularButtonConstraint() {
         NSLayoutConstraint.activate([
             popularButton.topAnchor.constraint(equalTo: topRatedButton.topAnchor),
-            popularButton.leadingAnchor.constraint(equalTo: topRatedButton.trailingAnchor, constant: 15),
-            popularButton.heightAnchor.constraint(equalToConstant: 50),
-            popularButton.widthAnchor.constraint(equalToConstant: 110)
+            popularButton.leadingAnchor.constraint(
+                equalTo: topRatedButton.trailingAnchor,
+                constant: ConstantsOfConstraint.popularButtonLeadingOfTopRatedButtonValue
+            ),
+            popularButton.heightAnchor.constraint(equalToConstant: ConstantsOfConstraint.buttonHeightValue),
+            popularButton.widthAnchor.constraint(equalToConstant: ConstantsOfConstraint.buttonWidthValue)
         ])
     }
 
     private func upCommingButtonConstraint() {
         NSLayoutConstraint.activate([
             upCommingButton.topAnchor.constraint(equalTo: topRatedButton.topAnchor),
-            upCommingButton.leadingAnchor.constraint(equalTo: popularButton.trailingAnchor, constant: 15),
-            upCommingButton.heightAnchor.constraint(equalToConstant: 50),
-            upCommingButton.widthAnchor.constraint(equalToConstant: 110)
+            upCommingButton.leadingAnchor.constraint(
+                equalTo: popularButton.trailingAnchor,
+                constant: ConstantsOfConstraint.upCommingButtonLeadingOfpopularButtonValue
+            ),
+            upCommingButton.heightAnchor.constraint(equalToConstant: ConstantsOfConstraint.buttonHeightValue),
+            upCommingButton.widthAnchor.constraint(equalToConstant: ConstantsOfConstraint.buttonWidthValue)
         ])
     }
 
     private func movieTableViewConstraint() {
         NSLayoutConstraint.activate([
-            movieTableView.topAnchor.constraint(equalTo: topRatedButton.bottomAnchor, constant: 20),
+            movieTableView.topAnchor.constraint(
+                equalTo: topRatedButton.bottomAnchor,
+                constant: ConstantsOfConstraint.movieTableViewTopOftopRatedButtonValue
+            ),
             movieTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             movieTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             movieTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -199,7 +222,7 @@ extension MoviesViewController: UITableViewDataSource {
             as? MovieTableViewCell,
             let movie = presenter.movies?[indexPath.row]
         else { return UITableViewCell() }
-        cell.update(movie: movie, networkService: networkService)
+        cell.configure(movie: movie, networkService: presenter.networkService)
         return cell
     }
 
@@ -208,11 +231,14 @@ extension MoviesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let degree = 60
-        let rotationAngel = CGFloat(Double(degree) * .pi / 180)
+        let degree = Constants.tableViewWillDisplayRowDegreeValue
+        let rotationAngel = CGFloat(Double(degree) * .pi / Constants.angel)
         let rotationPTransform = CATransform3DMakeRotation(rotationAngel, 1, 0, 0)
         cell.layer.transform = rotationPTransform
-        UIView.animate(withDuration: 0.15, delay: 0.15) {
+        UIView.animate(
+            withDuration: Constants.tableViewRowAnimateDurationValue,
+            delay: Constants.tableViewRowAnimateDelayValue
+        ) {
             cell.layer.transform = CATransform3DIdentity
         }
         presenter.newFetchMovies(to: indexPath.row)
@@ -230,7 +256,7 @@ extension MoviesViewController: UITableViewDelegate {
 /// MoviesViewProtocol
 extension MoviesViewController: MoviesViewProtocol {
     func setupAlpha() {
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: Constants.buttonsAnimateDuration) {
             self.topRatedButton.alpha = self.presenter.topRatedButtonAlpha
             self.popularButton.alpha = self.presenter.popularButtonAlpha
             self.upCommingButton.alpha = self.presenter.upcomingButtonAlpha

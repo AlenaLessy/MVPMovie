@@ -5,10 +5,11 @@ import Alamofire
 import Foundation
 import SwiftyJSON
 
+/// Протокол сетевых запросов
 protocol NetworkServiceProtocol {
-    func requestMovies(kind: MovieKind, page: Int, completion: ((Result<MovieResponse, NetworkError>) -> ())?)
-    func requestMovie(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?)
-    func requestRecommendationsMovie(
+    func fetchMovies(kind: MovieKind, page: Int, completion: ((Result<MovieResponse, NetworkError>) -> ())?)
+    func fetchMovie(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?)
+    func fetchRecommendationsMovie(
         id: Int,
         completion: ((Result<[RecommendationMovie], NetworkError>) -> ())?
     )
@@ -35,7 +36,7 @@ final class NetworkService: NetworkServiceProtocol {
 
     // MARK: - Public Methods
 
-    func requestMovies(kind: MovieKind, page: Int, completion: ((Result<MovieResponse, NetworkError>) -> ())?) {
+    func fetchMovies(kind: MovieKind, page: Int, completion: ((Result<MovieResponse, NetworkError>) -> ())?) {
         guard let url = URL(string: Constants.baseUrlString + kind.path) else {
             completion?(.failure(.urlFailure))
             return
@@ -62,7 +63,7 @@ final class NetworkService: NetworkServiceProtocol {
         }
     }
 
-    func requestMovie(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?) {
+    func fetchMovie(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?) {
         guard let url = URL(string: Constants.baseUrlString + Constants.movieText + id.description) else {
             completion?(.failure(.urlFailure))
             return
@@ -85,7 +86,7 @@ final class NetworkService: NetworkServiceProtocol {
             }
     }
 
-    func requestRecommendationsMovie(
+    func fetchRecommendationsMovie(
         id: Int,
         completion: ((Result<[RecommendationMovie], NetworkError>) -> ())?
     ) {
@@ -120,7 +121,7 @@ final class NetworkService: NetworkServiceProtocol {
             switch response.result {
             case let .success(data):
                 completion?(.success(data))
-            case let .failure(error):
+            case .failure:
                 completion?(.failure(.decodingFailure))
             }
         }

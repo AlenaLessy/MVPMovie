@@ -13,6 +13,7 @@ protocol MoviesPresenterProtocol: AnyObject {
     var topRatedButtonAlpha: Double { get set }
     var popularButtonAlpha: Double { get set }
     var upcomingButtonAlpha: Double { get set }
+    var networkService: NetworkServiceProtocol { get }
 
     init(view: MoviesViewProtocol, networkService: NetworkServiceProtocol, router: MoviesRouterProtocol)
 

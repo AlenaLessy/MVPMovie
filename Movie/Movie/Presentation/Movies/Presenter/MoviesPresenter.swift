@@ -5,21 +5,29 @@ import Foundation
 
 /// Презентер экрана выбора фильмов
 final class MoviesPresenter: MoviesPresenterProtocol {
+    // MARK: - Private Constants
+
+    private enum Constants {
+        static let one = 1
+        static let fullAlphaValue = 1.0
+        static let halfAlphaValue = 0.5
+    }
+
     // MARK: - Public Properties
 
-    let networkService: NetworkServiceProtocol!
+    let networkService: NetworkServiceProtocol
 
     weak var view: MoviesViewProtocol?
 
     var router: MoviesRouterProtocol?
     var currentKind: MovieKind = .topRated
     var movies: [Movie]?
-    var page = 1
-    var totalPages = 1
+    var page = Constants.one
+    var totalPages = Constants.one
     var isLoading = false
-    var topRatedButtonAlpha = 0.5
-    var popularButtonAlpha = 0.5
-    var upcomingButtonAlpha = 0.5
+    var topRatedButtonAlpha = Constants.halfAlphaValue
+    var popularButtonAlpha = Constants.halfAlphaValue
+    var upcomingButtonAlpha = Constants.halfAlphaValue
 
     // MARK: - Initializers
 
@@ -35,8 +43,8 @@ final class MoviesPresenter: MoviesPresenterProtocol {
     func requestMovies(_ kind: MovieKind, pagination: Bool = false) {
         isLoading = true
         view?.startActivityIndicator()
-        page = pagination ? page + 1 : page
-        networkService.requestMovies(kind: kind, page: page) { [weak self] result in
+        page = pagination ? page + Constants.one : page
+        networkService.fetchMovies(kind: kind, page: page) { [weak self] result in
             guard let self else { return }
             self.isLoading = false
             DispatchQueue.main.async {
@@ -66,24 +74,24 @@ final class MoviesPresenter: MoviesPresenterProtocol {
         guard currentKind != kind else { return }
         movies = []
         view?.reloadTableView()
-        page = 1
+        page = Constants.one
         currentKind = kind
         requestMovies(currentKind)
-        topRatedButtonAlpha = kind == .topRated ? 1 : 0.5
-        popularButtonAlpha = kind == .popular ? 1 : 0.5
-        upcomingButtonAlpha = kind == .upcoming ? 1 : 0.5
+        topRatedButtonAlpha = kind == .topRated ? Constants.fullAlphaValue : Constants.halfAlphaValue
+        popularButtonAlpha = kind == .popular ? Constants.fullAlphaValue : Constants.halfAlphaValue
+        upcomingButtonAlpha = kind == .upcoming ? Constants.fullAlphaValue : Constants.halfAlphaValue
         view?.setupAlpha()
     }
 
     func newFetchMovies(to indexPathRow: Int) {
         guard let movies else { return }
-        let isLastCell = indexPathRow == movies.count - 1
+        let isLastCell = indexPathRow == movies.count - Constants.one
         guard isLastCell, !isLoading, !movies.isEmpty else { return }
         requestMovies(currentKind, pagination: true)
     }
 
     func refreshControlAction() {
-        page = 1
+        page = Constants.one
         requestMovies(currentKind)
     }
 

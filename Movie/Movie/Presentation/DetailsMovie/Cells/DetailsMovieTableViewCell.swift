@@ -209,7 +209,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func update(_ movie: MovieDetails, networkService: NetworkService) {
+    func update(_ movie: MovieDetails, networkService: NetworkServiceProtocol) {
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.overview
         ratingLabel.text = movie.rating.description
@@ -244,7 +244,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         backgroundDescriptionView.addSubview(collectionView)
     }
 
-    private func fetchImage(networkService: NetworkService, urlString: String) {
+    private func fetchImage(networkService: NetworkServiceProtocol, urlString: String) {
         networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
             guard let self else { return }
             switch result {
@@ -253,7 +253,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
                     self.movieImageView.image = UIImage(data: data)
                 }
             case .failure:
-                print("error")
+                print(NetworkError.unknown.description)
             }
         }
     }

@@ -3,13 +3,16 @@
 
 import UIKit
 
+/// Протокол сборки модулей
 protocol AssemblyBuilderProtocol {
     func createMoviesModule(router: MoviesRouter) -> UIViewController
     func createDetailsMovieModule(id: Int, router: MoviesRouter) -> UIViewController
 }
 
 /// Составление вью-контроллеров
-class AssemblyModuleBuilder: AssemblyBuilderProtocol {
+final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
+    // MARK: - Public Methods
+
     func createMoviesModule(router: MoviesRouter) -> UIViewController {
         let view = MoviesViewController()
         let networkService = NetworkService()

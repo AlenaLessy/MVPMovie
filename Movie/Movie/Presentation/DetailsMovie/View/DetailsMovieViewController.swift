@@ -27,10 +27,6 @@ class DetailsMovieViewController: UIViewController {
 
     var presenter: DetailsMoviePresenterProtocol!
 
-    // MARK: - Private Properties
-
-    private var networkService = NetworkService()
-
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
@@ -70,7 +66,7 @@ extension DetailsMovieViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.detailsCellIdentifier)
             as? DetailsMovieTableViewCell else { return UITableViewCell() }
         guard let model = presenter.movieDetails else { return UITableViewCell() }
-        cell.update(model, networkService: networkService)
+        cell.update(model, networkService: presenter.networkService)
         cell.collectionView.register(
             RelatedMoviesCollectionViewCell.self,
             forCellWithReuseIdentifier: Constants.relatedCellIdentifier
@@ -101,7 +97,7 @@ extension DetailsMovieViewController: UICollectionViewDataSource {
             for: indexPath
         ) as? RelatedMoviesCollectionViewCell
         else { return UICollectionViewCell() }
-        cell.update(model, networkService: networkService)
+        cell.update(model, networkService: presenter.networkService)
         return cell
     }
 }

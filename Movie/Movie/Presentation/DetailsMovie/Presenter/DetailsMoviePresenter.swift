@@ -7,7 +7,7 @@ import Foundation
 final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
     // MARK: - Public Properties
 
-    let networkService: NetworkServiceProtocol!
+    let networkService: NetworkServiceProtocol
 
     weak var view: DetailsMovieViewProtocol?
     var router: MoviesRouterProtocol?
@@ -35,7 +35,7 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
 
     func requestMovieDetails() {
         guard let movieId else { return }
-        networkService.requestMovie(id: movieId) { [weak self] result in
+        networkService.fetchMovie(id: movieId) { [weak self] result in
             guard let self else { return }
             switch result {
             case .failure:
@@ -53,7 +53,7 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
 
     func requestRecommendationMovies() {
         guard let movieId else { return }
-        networkService.requestRecommendationsMovie(id: movieId) { [weak self] result in
+        networkService.fetchRecommendationsMovie(id: movieId) { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(response):

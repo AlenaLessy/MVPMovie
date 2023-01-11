@@ -37,7 +37,7 @@ final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Public Methods
 
-    func update(_ movie: RecommendationMovie, networkService: NetworkService) {
+    func update(_ movie: RecommendationMovie, networkService: NetworkServiceProtocol) {
         guard let urlString = movie.posterPath else { return }
         fetchImage(networkService: networkService, urlString: urlString)
         reloadInputViews()
@@ -49,7 +49,7 @@ final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(movieImageView)
     }
 
-    private func fetchImage(networkService: NetworkService, urlString: String) {
+    private func fetchImage(networkService: NetworkServiceProtocol, urlString: String) {
         networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
             guard let self else { return }
             switch result {
@@ -58,7 +58,7 @@ final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
                     self.movieImageView.image = UIImage(data: data)
                 }
             case .failure:
-                print("error")
+                print(NetworkError.unknown.description)
             }
         }
     }
