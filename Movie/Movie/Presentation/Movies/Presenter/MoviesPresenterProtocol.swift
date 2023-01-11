@@ -15,9 +15,7 @@ protocol MoviesPresenterProtocol: AnyObject {
     var upcomingButtonAlpha: Double { get set }
     var networkService: NetworkServiceProtocol { get }
 
-    init(view: MoviesViewProtocol, networkService: NetworkServiceProtocol, router: MoviesRouterProtocol)
-
-    func requestMovies(_ kind: MovieKind, pagination: Bool)
+    func fetchMovies(_ kind: MovieKind, pagination: Bool)
     func handleChangedKind(to identifier: String?)
     func newFetchMovies(to indexPathRow: Int)
     func refreshControlAction()

@@ -13,6 +13,8 @@ class DetailsMovieViewController: UIViewController {
         static let alertTitleText = "Ой!"
         static let alertMessageText = "Произошла ошибка(("
         static let alertActionTitleText = "Ok"
+        static let sizeForItemAtWidthValue = 150
+        static let sizeForItemAtHeightValue = 200
     }
 
     // MARK: - Private Outlets
@@ -66,7 +68,7 @@ extension DetailsMovieViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.detailsCellIdentifier)
             as? DetailsMovieTableViewCell else { return UITableViewCell() }
         guard let model = presenter.movieDetails else { return UITableViewCell() }
-        cell.update(model, networkService: presenter.networkService)
+        cell.configure(model, networkService: presenter.networkService)
         cell.collectionView.register(
             RelatedMoviesCollectionViewCell.self,
             forCellWithReuseIdentifier: Constants.relatedCellIdentifier
@@ -97,7 +99,7 @@ extension DetailsMovieViewController: UICollectionViewDataSource {
             for: indexPath
         ) as? RelatedMoviesCollectionViewCell
         else { return UICollectionViewCell() }
-        cell.update(model, networkService: presenter.networkService)
+        cell.configure(model, networkService: presenter.networkService)
         return cell
     }
 }
@@ -109,7 +111,7 @@ extension DetailsMovieViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        CGSize(width: 150, height: 200)
+        CGSize(width: Constants.sizeForItemAtWidthValue, height: Constants.sizeForItemAtHeightValue)
     }
 }
 

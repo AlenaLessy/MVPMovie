@@ -10,14 +10,7 @@ protocol DetailsMoviePresenterProtocol: AnyObject {
     var recommendationMovies: [RecommendationMovie] { get set }
     var networkService: NetworkServiceProtocol { get }
 
-    init(
-        view: DetailsMovieViewProtocol,
-        networkService: NetworkServiceProtocol,
-        movieId: Int,
-        router: MoviesRouterProtocol
-    )
-
-    func requestRecommendationMovies()
-    func requestMovieDetails()
+    func fetchRecommendationMovies()
+    func fetchMovieDetails()
     func popToRootVC()
 }

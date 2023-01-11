@@ -209,7 +209,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func update(_ movie: MovieDetails, networkService: NetworkServiceProtocol) {
+    func configure(_ movie: MovieDetails, networkService: NetworkServiceProtocol) {
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.overview
         ratingLabel.text = movie.rating.description

@@ -27,13 +27,13 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
         self.networkService = networkService
         self.movieId = movieId
         self.router = router
-        requestRecommendationMovies()
-        requestMovieDetails()
+        fetchRecommendationMovies()
+        fetchMovieDetails()
     }
 
     // MARK: - Public Methods
 
-    func requestMovieDetails() {
+    func fetchMovieDetails() {
         guard let movieId else { return }
         networkService.fetchMovie(id: movieId) { [weak self] result in
             guard let self else { return }
@@ -51,7 +51,7 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
         }
     }
 
-    func requestRecommendationMovies() {
+    func fetchRecommendationMovies() {
         guard let movieId else { return }
         networkService.fetchRecommendationsMovie(id: movieId) { [weak self] result in
             guard let self else { return }

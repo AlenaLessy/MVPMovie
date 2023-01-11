@@ -37,7 +37,7 @@ final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Public Methods
 
-    func update(_ movie: RecommendationMovie, networkService: NetworkServiceProtocol) {
+    func configure(_ movie: RecommendationMovie, networkService: NetworkServiceProtocol) {
         guard let urlString = movie.posterPath else { return }
         fetchImage(networkService: networkService, urlString: urlString)
         reloadInputViews()

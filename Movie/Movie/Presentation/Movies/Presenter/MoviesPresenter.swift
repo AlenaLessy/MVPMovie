@@ -35,12 +35,12 @@ final class MoviesPresenter: MoviesPresenterProtocol {
         self.view = view
         self.networkService = networkService
         self.router = router
-        requestMovies(.topRated)
+        fetchMovies(.topRated)
     }
 
     // MARK: - Public Methods
 
-    func requestMovies(_ kind: MovieKind, pagination: Bool = false) {
+    func fetchMovies(_ kind: MovieKind, pagination: Bool = false) {
         isLoading = true
         view?.startActivityIndicator()
         page = pagination ? page + Constants.one : page
@@ -76,7 +76,7 @@ final class MoviesPresenter: MoviesPresenterProtocol {
         view?.reloadTableView()
         page = Constants.one
         currentKind = kind
-        requestMovies(currentKind)
+        fetchMovies(currentKind)
         topRatedButtonAlpha = kind == .topRated ? Constants.fullAlphaValue : Constants.halfAlphaValue
         popularButtonAlpha = kind == .popular ? Constants.fullAlphaValue : Constants.halfAlphaValue
         upcomingButtonAlpha = kind == .upcoming ? Constants.fullAlphaValue : Constants.halfAlphaValue
@@ -87,12 +87,12 @@ final class MoviesPresenter: MoviesPresenterProtocol {
         guard let movies else { return }
         let isLastCell = indexPathRow == movies.count - Constants.one
         guard isLastCell, !isLoading, !movies.isEmpty else { return }
-        requestMovies(currentKind, pagination: true)
+        fetchMovies(currentKind, pagination: true)
     }
 
     func refreshControlAction() {
         page = Constants.one
-        requestMovies(currentKind)
+        fetchMovies(currentKind)
     }
 
     func tapDetailsMovie(id: Int) {
