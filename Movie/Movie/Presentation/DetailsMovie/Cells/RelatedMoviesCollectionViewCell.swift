@@ -5,6 +5,13 @@ import UIKit
 
 /// Ячейка рекомендованных фильмов
 final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
+    // MARK: - Private Constants
+
+    private enum Constants {
+        static let movieImageViewCornerRadiusValue: CGFloat = 15
+        static let movieImageViewHeightValue: CGFloat = 100
+    }
+
     // MARK: - Private Outlets
 
     private var relatedContentView: UIView = {
@@ -18,7 +25,7 @@ final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .brown
-        image.layer.cornerRadius = 15
+        image.layer.cornerRadius = Constants.movieImageViewCornerRadiusValue
         return image
     }()
 
@@ -71,7 +78,7 @@ final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
             movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             movieImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            movieImageView.heightAnchor.constraint(equalToConstant: 100)
+            movieImageView.heightAnchor.constraint(equalToConstant: Constants.movieImageViewHeightValue)
         ])
     }
 }
