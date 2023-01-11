@@ -12,7 +12,7 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
     weak var view: DetailsMovieViewProtocol?
     var router: MoviesRouterProtocol?
     var movieDetails: MovieDetails?
-    var movieId: Int?
+    var id: Int?
     var recommendationMovies: [RecommendationMovie] = []
 
     // MARK: - Initializers
@@ -25,7 +25,7 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
     ) {
         self.view = view
         self.networkService = networkService
-        self.movieId = movieId
+        id = movieId
         self.router = router
         fetchRecommendationMovies()
         fetchMovieDetails()
@@ -34,8 +34,8 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
     // MARK: - Public Methods
 
     func fetchMovieDetails() {
-        guard let movieId else { return }
-        networkService.fetchMovie(id: movieId) { [weak self] result in
+        guard let id else { return }
+        networkService.fetchMovieDetails(id: id) { [weak self] result in
             guard let self else { return }
             switch result {
             case .failure:
@@ -52,17 +52,16 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
     }
 
     func fetchRecommendationMovies() {
-        guard let movieId else { return }
-        networkService.fetchRecommendationsMovie(id: movieId) { [weak self] result in
+        guard let id else { return }
+        networkService.fetchRecommendationsMovie(id: id) { [weak self] result in
             guard let self else { return }
-            switch result {
-            case let .success(response):
-                self.recommendationMovies = response
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(response):
+                    self.recommendationMovies = response
+
                     self.view?.reloadTableView()
-                }
-            case .failure:
-                DispatchQueue.main.async {
+                case .failure:
                     self.view?.failure()
                 }
             }

@@ -6,7 +6,7 @@ import Foundation
 /// Вход экрана выбора фильмов
 protocol DetailsMoviePresenterProtocol: AnyObject {
     var movieDetails: MovieDetails? { get set }
-    var movieId: Int? { get set }
+    var id: Int? { get set }
     var recommendationMovies: [RecommendationMovie] { get set }
     var networkService: NetworkServiceProtocol { get }
 

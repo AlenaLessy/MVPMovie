@@ -50,16 +50,14 @@ final class MoviesPresenter: MoviesPresenterProtocol {
             DispatchQueue.main.async {
                 self.view?.stopActivityIndicatorAndRefreshControl()
             }
-            switch result {
-            case let .success(response):
-                self.page = response.page
-                self.totalPages = response.totalPages
-                self.movies = pagination ? (self.movies ?? []) + response.movies : response.movies
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(response):
+                    self.page = response.page
+                    self.totalPages = response.totalPages
+                    self.movies = pagination ? (self.movies ?? []) + response.movies : response.movies
                     self.view?.reloadTableView()
-                }
-            case .failure:
-                DispatchQueue.main.async {
+                case .failure:
                     self.view?.failure()
                 }
             }

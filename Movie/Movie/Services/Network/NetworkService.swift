@@ -8,7 +8,7 @@ import SwiftyJSON
 /// Протокол сетевых запросов
 protocol NetworkServiceProtocol {
     func fetchMovies(kind: MovieKind, page: Int, completion: ((Result<MovieResponse, NetworkError>) -> ())?)
-    func fetchMovie(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?)
+    func fetchMovieDetails(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?)
     func fetchRecommendationsMovie(
         id: Int,
         completion: ((Result<[RecommendationMovie], NetworkError>) -> ())?
@@ -63,7 +63,7 @@ final class NetworkService: NetworkServiceProtocol {
         }
     }
 
-    func fetchMovie(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?) {
+    func fetchMovieDetails(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?) {
         guard let url = URL(string: Constants.baseUrlString + Constants.movieText + id.description) else {
             completion?(.failure(.urlFailure))
             return

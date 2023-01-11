@@ -30,7 +30,7 @@
 		57820E3F296CA4740078B38B /* AssemblyModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E3E296CA4740078B38B /* AssemblyModuleBuilder.swift */; };
 		57820E41296D747C0078B38B /* MoviesViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E40296D747C0078B38B /* MoviesViewProtocol.swift */; };
 		57820E43296D753D0078B38B /* MoviesPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E42296D753D0078B38B /* MoviesPresenterProtocol.swift */; };
-		57820E45296D76BF0078B38B /* UIViewController + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E44296D76BF0078B38B /* UIViewController + extension.swift */; };
+		57820E45296D76BF0078B38B /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E44296D76BF0078B38B /* UIViewController+extension.swift */; };
 		57820E4A296D9F660078B38B /* DetailsMoviePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E49296D9F660078B38B /* DetailsMoviePresenter.swift */; };
 		57820E4E296D9FA10078B38B /* DetailsMovieViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E4D296D9FA10078B38B /* DetailsMovieViewProtocol.swift */; };
 		57820E50296D9FE00078B38B /* DetailsMoviePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E4F296D9FE00078B38B /* DetailsMoviePresenterProtocol.swift */; };
@@ -64,7 +64,7 @@
 		57820E3E296CA4740078B38B /* AssemblyModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyModuleBuilder.swift; sourceTree = "<group>"; };
 		57820E40296D747C0078B38B /* MoviesViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewProtocol.swift; sourceTree = "<group>"; };
 		57820E42296D753D0078B38B /* MoviesPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesPresenterProtocol.swift; sourceTree = "<group>"; };
-		57820E44296D76BF0078B38B /* UIViewController + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + extension.swift"; sourceTree = "<group>"; };
+		57820E44296D76BF0078B38B /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		57820E49296D9F660078B38B /* DetailsMoviePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsMoviePresenter.swift; sourceTree = "<group>"; };
 		57820E4D296D9FA10078B38B /* DetailsMovieViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsMovieViewProtocol.swift; sourceTree = "<group>"; };
 		57820E4F296D9FE00078B38B /* DetailsMoviePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsMoviePresenterProtocol.swift; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 		57820E46296D76E60078B38B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				57820E44296D76BF0078B38B /* UIViewController + extension.swift */,
+				57820E44296D76BF0078B38B /* UIViewController+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -405,7 +405,7 @@
 				572DD08C290BE8E400D0DA78 /* MovieResponse.swift in Sources */,
 				5717CA85290AAE6B00F91218 /* RelatedMoviesCollectionViewCell.swift in Sources */,
 				57820E57296E24CD0078B38B /* MoviesRouterProtocol.swift in Sources */,
-				57820E45296D76BF0078B38B /* UIViewController + extension.swift in Sources */,
+				57820E45296D76BF0078B38B /* UIViewController+extension.swift in Sources */,
 				57820E3F296CA4740078B38B /* AssemblyModuleBuilder.swift in Sources */,
 				57820E41296D747C0078B38B /* MoviesViewProtocol.swift in Sources */,
 				57820E3C296C8BD70078B38B /* MoviesPresenter.swift in Sources */,

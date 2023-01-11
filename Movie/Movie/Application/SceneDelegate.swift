@@ -2,7 +2,8 @@
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
-///
+
+/// Сцена
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
@@ -22,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         router.initialViewController()
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
-        window.backgroundColor = .black
         self.window = window
     }
 
