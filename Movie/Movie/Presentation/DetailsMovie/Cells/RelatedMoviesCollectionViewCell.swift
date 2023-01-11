@@ -1,14 +1,17 @@
-//
-//  RelatedMoviesCollectionViewCell.swift
-//  Movie
-//
-//  Created by Алена Панченко on 27.10.2022.
-//
+// RelatedMoviesCollectionViewCell.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
 /// Ячейка рекомендованных фильмов
 final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
+    // MARK: - Private Constants
+
+    private enum Constants {
+        static let movieImageViewCornerRadiusValue: CGFloat = 15
+        static let movieImageViewHeightValue: CGFloat = 100
+    }
+
     // MARK: - Private Outlets
 
     private var relatedContentView: UIView = {
@@ -22,7 +25,7 @@ final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .brown
-        image.layer.cornerRadius = 15
+        image.layer.cornerRadius = Constants.movieImageViewCornerRadiusValue
         return image
     }()
 
@@ -39,15 +42,32 @@ final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Public Methods
+
+    func configure(_ movie: RecommendationMovie, networkService: NetworkServiceProtocol) {
+        guard let urlString = movie.posterPath else { return }
+        fetchImage(networkService: networkService, urlString: urlString)
+        reloadInputViews()
+    }
+
     // MARK: - Private Methods
 
     private func addSubviews() {
         contentView.addSubview(movieImageView)
     }
 
-    func update(_ movie: RecommendationMovie) {
-        guard let url = movie.posterPath else { return }
-        movieImageView.loadImage(urlImage: url)
+    private func fetchImage(networkService: NetworkServiceProtocol, urlString: String) {
+        networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(data):
+                DispatchQueue.main.async {
+                    self.movieImageView.image = UIImage(data: data)
+                }
+            case .failure:
+                print(NetworkError.unknown.description)
+            }
+        }
     }
 
     // MARK: - Constrains
@@ -58,7 +78,7 @@ final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
             movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             movieImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            movieImageView.heightAnchor.constraint(equalToConstant: 100)
+            movieImageView.heightAnchor.constraint(equalToConstant: Constants.movieImageViewHeightValue)
         ])
     }
 }

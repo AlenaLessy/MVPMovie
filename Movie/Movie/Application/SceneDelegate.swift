@@ -1,9 +1,5 @@
-//
-//  SceneDelegate.swift
-//  ElectronicsStore
-//
-//  Created by Алена Панченко on 06.10.2022.
-//
+// SceneDelegate.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 ///
@@ -17,9 +13,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
-        let viewController = MoviesViewController()
-        let navigationVC = UINavigationController(rootViewController: viewController)
-        window.rootViewController = navigationVC
+        let navigationController = UINavigationController()
+        let assemblyModuleBuilder = AssemblyModuleBuilder()
+        let router = MoviesRouter(
+            navigationController: navigationController,
+            assemblyModuleBuilder: assemblyModuleBuilder
+        )
+        router.initialViewController()
+        window.rootViewController = navigationController
         window.makeKeyAndVisible()
         window.backgroundColor = .black
         self.window = window

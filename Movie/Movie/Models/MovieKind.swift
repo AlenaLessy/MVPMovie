@@ -1,9 +1,5 @@
-//
-//  MovieKind.swift
-//  Movie
-//
-//  Created by Алена Панченко on 27.10.2022.
-//
+// MovieKind.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
 

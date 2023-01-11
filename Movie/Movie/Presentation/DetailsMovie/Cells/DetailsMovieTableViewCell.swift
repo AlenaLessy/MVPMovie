@@ -1,9 +1,5 @@
-//
-//  MovieTableViewCell.swift
-//  Movie
-//
-//  Created by Алена Панченко on 26.10.2022.
-//
+// DetailsMovieTableViewCell.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -19,11 +15,56 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         static let releaseDateLabelText = "Дата выпуска:"
         static let descriptionLabelText = "Описание:"
         static let relatedCollectionViewCellIdentifier = "Relate"
+        static let collectionViewLeftContentInsertValue = 20
+        static let collectionViewContentInsetLeftValue: CGFloat = 20
+        static let collectionViewContentInsetRightValue: CGFloat = 20
+        static let collectionViewContentInsetTopValue: CGFloat = 40
+        static let collectionViewContentInsetBottomValue: CGFloat = 20
+        static let relatedMoviesLabelFontSize: CGFloat = 16
+        static let backgroundDescriptionViewCornerRadius: CGFloat = 20
+        static let countryIssueLabelFontSize: CGFloat = 16
+        static let releaseDateLabelFontSize: CGFloat = 16
+        static let currentCountryIssueLabelFontSize: CGFloat = 16
+        static let currentTimeLabelFontSize: CGFloat = 16
+        static let ratingLabelFontSize: CGFloat = 18
+        static let descriptionLabelFontSize: CGFloat = 16
+        static let currentReleaseDateLabelFontSize: CGFloat = 16
+        static let movieNameLabelFontSize: CGFloat = 20
+        static let movieDescriptionLabelFontSize: CGFloat = 16
+        static let movieDescriptionLabelNumberOfLinesValue = 0
     }
 
     private enum SystemImageName {
         static let clock = "clock"
         static let starFill = "star.fill"
+    }
+
+    private enum Constraint {
+        static let movieNameLabelTopValue: CGFloat = 20
+        static let movieNameLabelWidthValue: CGFloat = 400
+        static let movieImageViewTopValue: CGFloat = 15
+        static let movieImageViewWidthValue: CGFloat = 280
+        static let movieImageViewHeightValue: CGFloat = 280
+        static let backgroundDescriptionViewTopValue: CGFloat = -5
+        static let countryIssueLabelTopValue: CGFloat = 20
+        static let countryIssueLabelLeadingValue: CGFloat = 20
+        static let currentCountryIssueLabelTopValue: CGFloat = 5
+        static let releaseDateLabelLeadingValue: CGFloat = 80
+        static let separationStripViewLeadingValue: CGFloat = 20
+        static let separationStripViewHeightValue: CGFloat = 1
+        static let timeImageViewTopValue: CGFloat = 15
+        static let timeImageViewLeadingValue: CGFloat = 20
+        static let timeImageViewWidthValue: CGFloat = 25
+        static let timeImageViewHeightValue: CGFloat = 25
+        static let currentTimeLabelLeadingValue: CGFloat = 5
+        static let ratingImageViewWidthValue: CGFloat = 25
+        static let ratingImageViewHeightValue: CGFloat = 25
+        static let ratingLabelLeadingValue: CGFloat = 5
+        static let descriptionLabelTopValue: CGFloat = 20
+        static let movieDescriptionLabelLeadingValue: CGFloat = 20
+        static let movieDescriptionLabelTrailingValue: CGFloat = -20
+        static let relatedMoviesLabelTopValue: CGFloat = 20
+        static let collectionViewHeightValue: CGFloat = 200
     }
 
     // MARK: - Public Outlets
@@ -39,10 +80,10 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = UIColor(named: Constants.detailsViewColorName)
-        collectionView.contentInset.left = 20
-        collectionView.contentInset.right = 20
-        collectionView.contentInset.top = 40
-        collectionView.contentInset.bottom = 20
+        collectionView.contentInset.left = Constants.collectionViewContentInsetLeftValue
+        collectionView.contentInset.right = Constants.collectionViewContentInsetRightValue
+        collectionView.contentInset.top = Constants.collectionViewContentInsetTopValue
+        collectionView.contentInset.bottom = Constants.collectionViewContentInsetBottomValue
         return collectionView
     }()
 
@@ -54,7 +95,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         label.text = Constants.relatedMoviesLabelText
         label.textColor = .white
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = .systemFont(ofSize: Constants.relatedMoviesLabelFontSize, weight: .bold)
         return label
     }()
 
@@ -85,7 +126,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(named: Constants.detailsViewColorName)
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = Constants.backgroundDescriptionViewCornerRadius
         return view
     }()
 
@@ -116,7 +157,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         label.text = Constants.countryIssueLabelText
         label.textColor = .white
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = .systemFont(ofSize: Constants.countryIssueLabelFontSize, weight: .bold)
         return label
     }()
 
@@ -126,7 +167,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         label.text = Constants.releaseDateLabelText
         label.textColor = .white
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = .systemFont(ofSize: Constants.releaseDateLabelFontSize, weight: .bold)
         return label
     }()
 
@@ -135,7 +176,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .systemGray2
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = .systemFont(ofSize: Constants.currentCountryIssueLabelFontSize, weight: .semibold)
         return label
     }()
 
@@ -144,7 +185,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .systemGray2
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = .systemFont(ofSize: Constants.currentTimeLabelFontSize, weight: .semibold)
         return label
     }()
 
@@ -153,7 +194,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .systemGray2
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.font = .systemFont(ofSize: Constants.ratingLabelFontSize, weight: .semibold)
         return label
     }()
 
@@ -163,7 +204,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         label.text = Constants.descriptionLabelText
         label.textColor = .white
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = .systemFont(ofSize: Constants.descriptionLabelFontSize, weight: .bold)
         label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         return label
     }()
@@ -173,7 +214,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .systemGray2
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = .systemFont(ofSize: Constants.currentReleaseDateLabelFontSize, weight: .semibold)
         return label
     }()
 
@@ -182,7 +223,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: Constants.movieNameLabelFontSize, weight: .bold)
         return label
     }()
 
@@ -191,8 +232,8 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .systemGray2
         label.textAlignment = .justified
-        label.font = .systemFont(ofSize: 16)
-        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: Constants.movieDescriptionLabelFontSize)
+        label.numberOfLines = Constants.movieDescriptionLabelNumberOfLinesValue
         label.sizeToFit()
         return label
     }()
@@ -209,6 +250,20 @@ final class DetailsMovieTableViewCell: UITableViewCell {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Public Methods
+
+    func configure(_ movie: MovieDetails, networkService: NetworkServiceProtocol) {
+        movieNameLabel.text = movie.title
+        movieDescriptionLabel.text = movie.overview
+        ratingLabel.text = movie.rating.description
+        currentReleaseDateLabel.text = movie.releaseDate
+        currentTimeLabel.text = "\(movie.runtime.description) мин"
+        guard let countriesName = movie.productionCountries.first
+        else { return }
+        currentCountryIssueLabel.text = countriesName
+        fetchImage(networkService: networkService, urlString: movie.posterPath)
     }
 
     // MARK: - Private Methods
@@ -234,15 +289,18 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         backgroundDescriptionView.addSubview(collectionView)
     }
 
-    func update(_ movie: MovieDetails) {
-        movieNameLabel.text = movie.title
-        movieDescriptionLabel.text = movie.overview
-        ratingLabel.text = movie.rating.description
-        currentReleaseDateLabel.text = movie.releaseDate
-        currentTimeLabel.text = "\(movie.runtime.description) мин"
-        guard let countriesName = movie.productionCountries.first?.name else { return }
-        currentCountryIssueLabel.text = countriesName
-        movieImageView.loadImage(urlImage: movie.posterPath)
+    private func fetchImage(networkService: NetworkServiceProtocol, urlString: String) {
+        networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(data):
+                DispatchQueue.main.async {
+                    self.movieImageView.image = UIImage(data: data)
+                }
+            case .failure:
+                print(NetworkError.unknown.description)
+            }
+        }
     }
 
     // MARK: - Constrains
@@ -270,24 +328,33 @@ final class DetailsMovieTableViewCell: UITableViewCell {
 
     private func movieNameLabelConstrains() {
         NSLayoutConstraint.activate([
-            movieNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            movieNameLabel.topAnchor.constraint(
+                equalTo: contentView.topAnchor,
+                constant: Constraint.movieNameLabelTopValue
+            ),
             movieNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            movieNameLabel.widthAnchor.constraint(equalToConstant: 400)
+            movieNameLabel.widthAnchor.constraint(equalToConstant: Constraint.movieNameLabelWidthValue)
         ])
     }
 
     private func movieImageViewConstrains() {
         NSLayoutConstraint.activate([
-            movieImageView.topAnchor.constraint(equalTo: movieNameLabel.bottomAnchor, constant: 15),
+            movieImageView.topAnchor.constraint(
+                equalTo: movieNameLabel.bottomAnchor,
+                constant: Constraint.movieImageViewTopValue
+            ),
             movieImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            movieImageView.heightAnchor.constraint(equalToConstant: 280),
-            movieImageView.widthAnchor.constraint(equalToConstant: 280)
+            movieImageView.heightAnchor.constraint(equalToConstant: Constraint.movieImageViewHeightValue),
+            movieImageView.widthAnchor.constraint(equalToConstant: Constraint.movieImageViewWidthValue)
         ])
     }
 
     private func backgroundDescriptionViewConstrains() {
         NSLayoutConstraint.activate([
-            backgroundDescriptionView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: -5),
+            backgroundDescriptionView.topAnchor.constraint(
+                equalTo: movieImageView.bottomAnchor,
+                constant: Constraint.backgroundDescriptionViewTopValue
+            ),
             backgroundDescriptionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             backgroundDescriptionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             backgroundDescriptionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
@@ -296,14 +363,23 @@ final class DetailsMovieTableViewCell: UITableViewCell {
 
     private func countryIssueLabelConstrains() {
         NSLayoutConstraint.activate([
-            countryIssueLabel.topAnchor.constraint(equalTo: backgroundDescriptionView.topAnchor, constant: 20),
-            countryIssueLabel.leadingAnchor.constraint(equalTo: backgroundDescriptionView.leadingAnchor, constant: 20)
+            countryIssueLabel.topAnchor.constraint(
+                equalTo: backgroundDescriptionView.topAnchor,
+                constant: Constraint.countryIssueLabelTopValue
+            ),
+            countryIssueLabel.leadingAnchor.constraint(
+                equalTo: backgroundDescriptionView.leadingAnchor,
+                constant: Constraint.countryIssueLabelLeadingValue
+            )
         ])
     }
 
     private func currentCountryIssueLabelConstrains() {
         NSLayoutConstraint.activate([
-            currentCountryIssueLabel.topAnchor.constraint(equalTo: countryIssueLabel.bottomAnchor, constant: 5),
+            currentCountryIssueLabel.topAnchor.constraint(
+                equalTo: countryIssueLabel.bottomAnchor,
+                constant: Constraint.currentCountryIssueLabelTopValue
+            ),
             currentCountryIssueLabel.leadingAnchor.constraint(equalTo: countryIssueLabel.leadingAnchor)
         ])
     }
@@ -311,7 +387,10 @@ final class DetailsMovieTableViewCell: UITableViewCell {
     private func releaseDateLabelConstrains() {
         NSLayoutConstraint.activate([
             releaseDateLabel.topAnchor.constraint(equalTo: countryIssueLabel.topAnchor),
-            releaseDateLabel.leadingAnchor.constraint(equalTo: countryIssueLabel.trailingAnchor, constant: 80)
+            releaseDateLabel.leadingAnchor.constraint(
+                equalTo: countryIssueLabel.trailingAnchor,
+                constant: Constraint.releaseDateLabelLeadingValue
+            )
         ])
     }
 
@@ -324,26 +403,38 @@ final class DetailsMovieTableViewCell: UITableViewCell {
 
     private func separationStripViewConstrains() {
         NSLayoutConstraint.activate([
-            separationStripView.topAnchor.constraint(equalTo: currentReleaseDateLabel.bottomAnchor, constant: 20),
+            separationStripView.topAnchor.constraint(
+                equalTo: currentReleaseDateLabel.bottomAnchor,
+                constant: Constraint.separationStripViewLeadingValue
+            ),
             separationStripView.widthAnchor.constraint(equalTo: backgroundDescriptionView.widthAnchor),
             separationStripView.leadingAnchor.constraint(equalTo: backgroundDescriptionView.leadingAnchor),
-            separationStripView.heightAnchor.constraint(equalToConstant: 1)
+            separationStripView.heightAnchor.constraint(equalToConstant: Constraint.separationStripViewHeightValue)
         ])
     }
 
     private func timeImageViewConstrains() {
         NSLayoutConstraint.activate([
-            timeImageView.topAnchor.constraint(equalTo: separationStripView.bottomAnchor, constant: 15),
-            timeImageView.leadingAnchor.constraint(equalTo: backgroundDescriptionView.leadingAnchor, constant: 20),
-            timeImageView.heightAnchor.constraint(equalToConstant: 25),
-            timeImageView.widthAnchor.constraint(equalToConstant: 25)
+            timeImageView.topAnchor.constraint(
+                equalTo: separationStripView.bottomAnchor,
+                constant: Constraint.timeImageViewTopValue
+            ),
+            timeImageView.leadingAnchor.constraint(
+                equalTo: backgroundDescriptionView.leadingAnchor,
+                constant: Constraint.timeImageViewLeadingValue
+            ),
+            timeImageView.heightAnchor.constraint(equalToConstant: Constraint.timeImageViewHeightValue),
+            timeImageView.widthAnchor.constraint(equalToConstant: Constraint.timeImageViewWidthValue)
         ])
     }
 
     private func currentTimeLabelConstrains() {
         NSLayoutConstraint.activate([
             currentTimeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor),
-            currentTimeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: 5)
+            currentTimeLabel.leadingAnchor.constraint(
+                equalTo: timeImageView.trailingAnchor,
+                constant: Constraint.currentTimeLabelLeadingValue
+            )
         ])
     }
 
@@ -351,30 +442,39 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             ratingImageView.topAnchor.constraint(equalTo: timeImageView.topAnchor),
             ratingImageView.leadingAnchor.constraint(equalTo: releaseDateLabel.leadingAnchor),
-            ratingImageView.heightAnchor.constraint(equalToConstant: 25),
-            ratingImageView.widthAnchor.constraint(equalToConstant: 25)
+            ratingImageView.heightAnchor.constraint(equalToConstant: Constraint.ratingImageViewHeightValue),
+            ratingImageView.widthAnchor.constraint(equalToConstant: Constraint.ratingImageViewWidthValue)
         ])
     }
 
     private func ratingLabelConstrains() {
         NSLayoutConstraint.activate([
             ratingLabel.centerYAnchor.constraint(equalTo: ratingImageView.centerYAnchor),
-            ratingLabel.leadingAnchor.constraint(equalTo: ratingImageView.trailingAnchor, constant: 5)
+            ratingLabel.leadingAnchor.constraint(
+                equalTo: ratingImageView.trailingAnchor,
+                constant: Constraint.ratingLabelLeadingValue
+            )
         ])
     }
 
     private func separationStripTwoViewConstrains() {
         NSLayoutConstraint.activate([
-            separationStripTwoView.topAnchor.constraint(equalTo: currentTimeLabel.bottomAnchor, constant: 20),
+            separationStripTwoView.topAnchor.constraint(
+                equalTo: currentTimeLabel.bottomAnchor,
+                constant: Constraint.separationStripViewLeadingValue
+            ),
             separationStripTwoView.widthAnchor.constraint(equalTo: backgroundDescriptionView.widthAnchor),
             separationStripTwoView.leadingAnchor.constraint(equalTo: backgroundDescriptionView.leadingAnchor),
-            separationStripTwoView.heightAnchor.constraint(equalToConstant: 1)
+            separationStripTwoView.heightAnchor.constraint(equalToConstant: Constraint.separationStripViewHeightValue)
         ])
     }
 
     private func descriptionLabelConstrains() {
         NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: separationStripTwoView.topAnchor, constant: 20),
+            descriptionLabel.topAnchor.constraint(
+                equalTo: separationStripTwoView.topAnchor,
+                constant: Constraint.descriptionLabelTopValue
+            ),
             descriptionLabel.leadingAnchor.constraint(equalTo: countryIssueLabel.leadingAnchor)
         ])
     }
@@ -384,27 +484,33 @@ final class DetailsMovieTableViewCell: UITableViewCell {
             movieDescriptionLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 5),
             movieDescriptionLabel.leadingAnchor.constraint(
                 equalTo: backgroundDescriptionView.leadingAnchor,
-                constant: 20
+                constant: Constraint.movieDescriptionLabelLeadingValue
             ),
             movieDescriptionLabel.trailingAnchor.constraint(
                 equalTo: backgroundDescriptionView.trailingAnchor,
-                constant: -20
+                constant: Constraint.movieDescriptionLabelTrailingValue
             )
         ])
     }
 
     private func separationStripThreeViewConstrains() {
         NSLayoutConstraint.activate([
-            separationStripThreeView.topAnchor.constraint(equalTo: movieDescriptionLabel.bottomAnchor, constant: 20),
+            separationStripThreeView.topAnchor.constraint(
+                equalTo: movieDescriptionLabel.bottomAnchor,
+                constant: Constraint.separationStripViewLeadingValue
+            ),
             separationStripThreeView.widthAnchor.constraint(equalTo: backgroundDescriptionView.widthAnchor),
             separationStripThreeView.leadingAnchor.constraint(equalTo: backgroundDescriptionView.leadingAnchor),
-            separationStripThreeView.heightAnchor.constraint(equalToConstant: 1)
+            separationStripThreeView.heightAnchor.constraint(equalToConstant: Constraint.separationStripViewHeightValue)
         ])
     }
 
     private func relatedMoviesLabelConstrains() {
         NSLayoutConstraint.activate([
-            relatedMoviesLabel.topAnchor.constraint(equalTo: separationStripThreeView.bottomAnchor, constant: 20),
+            relatedMoviesLabel.topAnchor.constraint(
+                equalTo: separationStripThreeView.bottomAnchor,
+                constant: Constraint.relatedMoviesLabelTopValue
+            ),
             relatedMoviesLabel.leadingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor)
         ])
     }
@@ -414,7 +520,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
             collectionView.topAnchor.constraint(equalTo: relatedMoviesLabel.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 200),
+            collectionView.heightAnchor.constraint(equalToConstant: Constraint.collectionViewHeightValue),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
