@@ -42,7 +42,7 @@ final class NetworkService: NetworkServiceProtocol {
         }
 
         let parameters = [
-            Constants.queryItemApiKeyName: "0ec73b9e206615099e204ec4a0da2380",
+            Constants.queryItemApiKeyName: StorageKeyChain.shared.readValueFromKeyChain(from: .apiKey),
             Constants.queryItemLanguageName: Constants.language,
             Constants.queryItemPageName: page.description
         ]
@@ -72,8 +72,7 @@ final class NetworkService: NetworkServiceProtocol {
         }
 
         let parameters = [
-            // Constants.queryItemApiKeyName: StorageKeyChain.shared.readValueFromKeyChain(from: .apiKey),
-            Constants.queryItemApiKeyName: "0ec73b9e206615099e204ec4a0da2380",
+            Constants.queryItemApiKeyName: StorageKeyChain.shared.readValueFromKeyChain(from: .apiKey),
             Constants.queryItemLanguageName: Constants.language
         ]
 
@@ -102,8 +101,7 @@ final class NetworkService: NetworkServiceProtocol {
         }
 
         let parameters = [
-            // Constants.queryItemApiKeyName: StorageKeyChain.shared.readValueFromKeyChain(from: .apiKey),
-            Constants.queryItemApiKeyName: "0ec73b9e206615099e204ec4a0da2380",
+            Constants.queryItemApiKeyName: StorageKeyChain.shared.readValueFromKeyChain(from: .apiKey),
             Constants.queryItemLanguageName: Constants.language
         ]
 

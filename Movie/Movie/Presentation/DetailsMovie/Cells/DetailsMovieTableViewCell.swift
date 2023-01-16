@@ -274,7 +274,6 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         guard let countriesName = movie.productionCountries.first
         else { return }
         currentCountryIssueLabel.text = countriesName
-        //  fetchImage(networkService: networkService, urlString: movie.posterPath)
     }
 
     // MARK: - Private Methods
@@ -304,21 +303,6 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         imageService.fetchPhoto(byUrl: urlString) { [weak self] image in
             self?.movieImageView.image = image
         }
-//        guard let image = imageService.photo(byUrl: urlString) else { return }
-//        movieImageView.image = image
-//        reloadInputViews()
-
-//        networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
-//            guard let self else { return }
-//            switch result {
-//            case let .success(data):
-//                DispatchQueue.main.async {
-//                    self.movieImageView.image = UIImage(data: data)
-//                }
-//            case .failure:
-//                print(NetworkError.unknown.description)
-//            }
-//        }
     }
 
     // MARK: - Constrains

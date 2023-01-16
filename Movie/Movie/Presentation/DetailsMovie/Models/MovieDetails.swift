@@ -71,9 +71,7 @@ final class MovieDetails: Object {
         tagline = json["tagline"].stringValue
         releaseDate = json["release_date"].stringValue
         runtime = json["runtime"].intValue
-        // json["production_countries"].arrayValue.compactMap(\.stringValue).forEach { productionCountries.append($0) }
         productionCountries.forEach { self.productionCountries.append($0) }
-//       productionCountries = json["production_countries"].arrayValue.map { $0["name"].stringValue }
         id = json["id"].intValue
     }
 }

@@ -115,20 +115,7 @@ final class MovieTableViewCell: UITableViewCell {
 
         imageService.fetchPhoto(byUrl: urlString) { [weak self] image in
             self?.movieImageView.image = image
-            // disable loading
         }
-
-//        networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
-//            guard let self else { return }
-//            switch result {
-//            case let .success(data):
-//                DispatchQueue.main.async {
-//                    self.movieImageView.image = UIImage(data: data)
-//                }
-//            case .failure:
-//                print(NetworkError.unknown.description)
-//            }
-//        }
     }
 
     // MARK: - Constrains

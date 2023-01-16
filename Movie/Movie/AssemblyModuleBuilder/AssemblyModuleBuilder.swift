@@ -5,15 +5,15 @@ import UIKit
 
 /// Протокол сборки модулей
 protocol AssemblyBuilderProtocol {
-    func makeMoviesModule(router: MoviesRouter) -> UIViewController
-    func makeDetailsMovieModule(id: Int, router: MoviesRouter) -> UIViewController
+    func makeMoviesModule(router: MoviesRouterProtocol) -> UIViewController
+    func makeDetailsMovieModule(id: Int, router: MoviesRouterProtocol) -> UIViewController
 }
 
 /// Составление модулей
 final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
     // MARK: - Public Methods
 
-    func makeMoviesModule(router: MoviesRouter) -> UIViewController {
+    func makeMoviesModule(router: MoviesRouterProtocol) -> UIViewController {
         let view = MoviesViewController()
         let dataProvider = makeDataProvider()
 
@@ -28,7 +28,7 @@ final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
         return view
     }
 
-    func makeDetailsMovieModule(id: Int, router: MoviesRouter) -> UIViewController {
+    func makeDetailsMovieModule(id: Int, router: MoviesRouterProtocol) -> UIViewController {
         let view = DetailsMovieViewController()
         let dataProvider = makeDataProvider()
         let imageService = makeImageService()

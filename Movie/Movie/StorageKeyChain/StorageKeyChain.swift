@@ -35,7 +35,8 @@ final class StorageKeyChain {
 
     func readValueFromKeyChain(from key: KeyFromKeyChainKind) -> String {
         guard let value = keyChain.get(key.description) else {
-            return String()
+            safeValueToKeyChain(key: .apiKey, value: apiKeyValue ?? "")
+            return readValueFromKeyChain(from: key)
         }
         return value
     }

@@ -16,7 +16,7 @@ final class MoviesPresenter: MoviesPresenterProtocol {
     // MARK: - Public Properties
 
     let dataProvider: DataProviderProtocol
-    var imageService: ImageServiceProtocol
+    let imageService: ImageServiceProtocol
 
     weak var view: MoviesViewProtocol?
 
