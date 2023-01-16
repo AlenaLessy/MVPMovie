@@ -44,9 +44,16 @@ final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Public Methods
 
-    func configure(_ movie: RecommendationMovie, networkService: NetworkServiceProtocol) {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        movieImageView.image = nil
+    }
+
+    // MARK: - Public Methods
+
+    func configure(_ movie: RecommendationMovie, imageService: ImageServiceProtocol) {
         guard let urlString = movie.posterPath else { return }
-        fetchImage(networkService: networkService, urlString: urlString)
+        fetchPhoto(imageService: imageService, urlString: urlString)
         reloadInputViews()
     }
 
@@ -56,17 +63,10 @@ final class RelatedMoviesCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(movieImageView)
     }
 
-    private func fetchImage(networkService: NetworkServiceProtocol, urlString: String) {
-        networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case let .success(data):
-                DispatchQueue.main.async {
-                    self.movieImageView.image = UIImage(data: data)
-                }
-            case .failure:
-                print(NetworkError.unknown.description)
-            }
+    private func fetchPhoto(imageService: ImageServiceProtocol, urlString: String) {
+        imageService.fetchPhoto(byUrl: urlString) { [weak self] data in
+            guard let data else { return }
+            self?.movieImageView.image = UIImage(data: data)
         }
     }
 

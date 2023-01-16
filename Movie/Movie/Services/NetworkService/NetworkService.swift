@@ -3,17 +3,17 @@
 
 import Alamofire
 import Foundation
+import KeychainSwift
 import SwiftyJSON
 
 /// Протокол сетевых запросов
 protocol NetworkServiceProtocol {
-    func fetchMovies(kind: MovieKind, page: Int, completion: ((Result<MovieResponse, NetworkError>) -> ())?)
-    func fetchMovie(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?)
+    func fetchMovies(kind: MovieKind, page: Int, completion: ((Result<[Movie], NetworkError>) -> ())?)
+    func fetchDetailsMovie(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?)
     func fetchRecommendationsMovie(
         id: Int,
         completion: ((Result<[RecommendationMovie], NetworkError>) -> ())?
     )
-    func fetchImage(imageUrlPath: String, completion: ((Result<Data, NetworkError>) -> ())?)
 }
 
 /// Cетевые запросы
@@ -21,7 +21,6 @@ final class NetworkService: NetworkServiceProtocol {
     // MARK: - Private Constants
 
     private enum Constants {
-        static let apiKey = "0ec73b9e206615099e204ec4a0da2380"
         static let baseUrlString = "https://api.themoviedb.org/3/"
         static let queryItemApiKeyName = "api_key"
         static let queryItemLanguageName = "language"
@@ -34,16 +33,20 @@ final class NetworkService: NetworkServiceProtocol {
         static let baseImageIRLString = "https://image.tmdb.org/t/p/w500"
     }
 
+    // MARK: - Private Properties
+
+    private let storageKeyChain = StorageKeyChain()
+
     // MARK: - Public Methods
 
-    func fetchMovies(kind: MovieKind, page: Int, completion: ((Result<MovieResponse, NetworkError>) -> ())?) {
+    func fetchMovies(kind: MovieKind, page: Int, completion: ((Result<[Movie], NetworkError>) -> ())?) {
         guard let url = URL(string: Constants.baseUrlString + kind.path) else {
             completion?(.failure(.urlFailure))
             return
         }
 
         let parameters = [
-            Constants.queryItemApiKeyName: Constants.apiKey,
+            Constants.queryItemApiKeyName: storageKeyChain.readValueFromKeyChain(from: .apiKey),
             Constants.queryItemLanguageName: Constants.language,
             Constants.queryItemPageName: page.description
         ]
@@ -54,8 +57,11 @@ final class NetworkService: NetworkServiceProtocol {
             parameters: parameters
         ).responseJSON { responseJSON in
             switch responseJSON.result {
-            case let .success(value):
-                let response = MovieResponse(json: JSON(value))
+            case let .success(json):
+                let page = JSON(json)["page"].intValue
+                let totalPages = JSON(json)["total_pages"].intValue
+                let response = JSON(json)[Constants.resultsText].arrayValue
+                    .map { Movie(json: $0, page: page, totalPages: totalPages, movieKind: kind) }
                 completion?(.success(response))
             case .failure:
                 completion?(.failure(.decodingFailure))
@@ -63,14 +69,14 @@ final class NetworkService: NetworkServiceProtocol {
         }
     }
 
-    func fetchMovie(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?) {
+    func fetchDetailsMovie(id: Int, completion: ((Result<MovieDetails, NetworkError>) -> ())?) {
         guard let url = URL(string: Constants.baseUrlString + Constants.movieText + id.description) else {
             completion?(.failure(.urlFailure))
             return
         }
 
         let parameters = [
-            Constants.queryItemApiKeyName: Constants.apiKey,
+            Constants.queryItemApiKeyName: storageKeyChain.readValueFromKeyChain(from: .apiKey),
             Constants.queryItemLanguageName: Constants.language
         ]
 
@@ -99,7 +105,7 @@ final class NetworkService: NetworkServiceProtocol {
         }
 
         let parameters = [
-            Constants.queryItemApiKeyName: Constants.apiKey,
+            Constants.queryItemApiKeyName: storageKeyChain.readValueFromKeyChain(from: .apiKey),
             Constants.queryItemLanguageName: Constants.language
         ]
 
@@ -107,23 +113,12 @@ final class NetworkService: NetworkServiceProtocol {
             .responseJSON { responseJSON in
                 switch responseJSON.result {
                 case let .success(value):
-                    let response = JSON(value)[Constants.resultsText].arrayValue.map { RecommendationMovie(json: $0) }
+                    let response = JSON(value)[Constants.resultsText].arrayValue
+                        .map { RecommendationMovie(json: $0, id: id) }
                     completion?(.success(response))
                 case .failure:
                     completion?(.failure(.decodingFailure))
                 }
             }
-    }
-
-    func fetchImage(imageUrlPath: String, completion: ((Result<Data, NetworkError>) -> ())?) {
-        let imageUrl = "\(Constants.baseImageIRLString)\(imageUrlPath)"
-        AF.request(imageUrl).responseData { response in
-            switch response.result {
-            case let .success(data):
-                completion?(.success(data))
-            case .failure:
-                completion?(.failure(.decodingFailure))
-            }
-        }
     }
 }

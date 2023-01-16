@@ -24,7 +24,7 @@ final class MoviesRouter: MoviesRouterProtocol {
 
     func initialViewController() {
         guard let navigationController,
-              let moviesViewController = assemblyModuleBuilder?.createMoviesModule(router: self)
+              let moviesViewController = assemblyModuleBuilder?.makeMoviesModule(router: self)
         else { return }
         navigationController.viewControllers = [moviesViewController]
     }
@@ -36,7 +36,7 @@ final class MoviesRouter: MoviesRouterProtocol {
 
     func showDetail(id: Int) {
         guard let navigationController,
-              let detailMovieViewController = assemblyModuleBuilder?.createDetailsMovieModule(id: id, router: self)
+              let detailMovieViewController = assemblyModuleBuilder?.makeDetailsMovieModule(id: id, router: self)
         else { return }
         navigationController.pushViewController(detailMovieViewController, animated: true)
     }

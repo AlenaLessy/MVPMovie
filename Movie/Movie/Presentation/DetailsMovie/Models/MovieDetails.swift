@@ -2,30 +2,32 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
+import RealmSwift
 import SwiftyJSON
 
-/// Модель деталей фильма
-struct MovieDetails {
+final class MovieDetails: Object {
     /// Путь к постеру фильма
-    let posterPath: String
+    @Persisted var posterPath: String
     /// Описание
-    let overview: String
+    @Persisted var overview: String
     /// Название
-    let title: String
+    @Persisted var title: String
     /// Райтинг
-    let rating: Double
+    @Persisted var rating: Double
     /// Слоган фильма
-    let tagline: String
+    @Persisted var tagline: String
     /// Дата релиза
-    let releaseDate: String
+    @Persisted var releaseDate: String
     /// Время фильма
-    let runtime: Int
+    @Persisted var runtime: Int
     /// Страна производства
-    let productionCountries: [String]
+    @Persisted var productionCountries: List<String>
     /// Id фильма
-    let id: Int
+    @Persisted(primaryKey: true) var id: Int
 
-    init(json: JSON) {
+    convenience init(json: JSON) {
+        self.init()
+
         posterPath = json["backdrop_path"].stringValue
         overview = json["overview"].stringValue
         title = json["title"].stringValue
@@ -33,7 +35,7 @@ struct MovieDetails {
         tagline = json["tagline"].stringValue
         releaseDate = json["release_date"].stringValue
         runtime = json["runtime"].intValue
-        productionCountries = json["production_countries"].arrayValue.map { $0["name"].stringValue }
+        productionCountries.forEach { self.productionCountries.append($0) }
         id = json["id"].intValue
     }
 }

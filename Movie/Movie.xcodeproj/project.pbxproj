@@ -11,7 +11,6 @@
 		5717CA85290AAE6B00F91218 /* RelatedMoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5717CA84290AAE6B00F91218 /* RelatedMoviesCollectionViewCell.swift */; };
 		5717CA89290B103800F91218 /* MovieKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5717CA88290B103700F91218 /* MovieKind.swift */; };
 		572DD08A290BE3A500D0DA78 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572DD089290BE3A500D0DA78 /* NetworkError.swift */; };
-		572DD08C290BE8E400D0DA78 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572DD08B290BE8E400D0DA78 /* MovieResponse.swift */; };
 		572DD08E290BE91100D0DA78 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572DD08D290BE91100D0DA78 /* Movie.swift */; };
 		572DD090290BE94600D0DA78 /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572DD08F290BE94600D0DA78 /* MovieDetails.swift */; };
 		572DD098290C0BCA00D0DA78 /* RecommendationMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572DD097290C0BCA00D0DA78 /* RecommendationMovie.swift */; };
@@ -24,13 +23,23 @@
 		57365CBF2908248B00A72B5C /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57365CBE2908248B00A72B5C /* MovieTableViewCell.swift */; };
 		57365CCA2908367900A72B5C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57365CC92908367800A72B5C /* NetworkService.swift */; };
 		57365CD129094F7900A72B5C /* DetailsMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57365CD029094F7900A72B5C /* DetailsMovieViewController.swift */; };
+		57384E28296EF6BE006D964D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 57384E27296EF6BE006D964D /* Realm */; };
+		57384E2A296EF6BE006D964D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57384E29296EF6BE006D964D /* RealmSwift */; };
+		57384E2C296EF8CE006D964D /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E2B296EF8CE006D964D /* ImageService.swift */; };
+		57384E33296F0020006D964D /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E32296F0020006D964D /* Realm.swift */; };
+		57384E36296F02A3006D964D /* ImageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E35296F02A3006D964D /* ImageServiceProtocol.swift */; };
+		57384E38296F5E6F006D964D /* StorageKeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E37296F5E6F006D964D /* StorageKeyChain.swift */; };
+		57384E3B29701E85006D964D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E3A29701E84006D964D /* DataService.swift */; };
+		57384E3E29717C6C006D964D /* KeyFromKeyChainKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E3D29717C6C006D964D /* KeyFromKeyChainKind.swift */; };
+		57384E402973EB81006D964D /* ImageApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E3F2973EB81006D964D /* ImageApiService.swift */; };
+		57384E422973EF68006D964D /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E412973EF67006D964D /* FileManagerService.swift */; };
 		57820E36296C40DB0078B38B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 57820E35296C40DB0078B38B /* Alamofire */; };
 		57820E39296C42060078B38B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 57820E38296C42060078B38B /* SwiftyJSON */; };
 		57820E3C296C8BD70078B38B /* MoviesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E3B296C8BD70078B38B /* MoviesPresenter.swift */; };
 		57820E3F296CA4740078B38B /* AssemblyModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E3E296CA4740078B38B /* AssemblyModuleBuilder.swift */; };
 		57820E41296D747C0078B38B /* MoviesViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E40296D747C0078B38B /* MoviesViewProtocol.swift */; };
 		57820E43296D753D0078B38B /* MoviesPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E42296D753D0078B38B /* MoviesPresenterProtocol.swift */; };
-		57820E45296D76BF0078B38B /* UIViewController + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E44296D76BF0078B38B /* UIViewController + extension.swift */; };
+		57820E45296D76BF0078B38B /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E44296D76BF0078B38B /* UIViewController+extension.swift */; };
 		57820E4A296D9F660078B38B /* DetailsMoviePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E49296D9F660078B38B /* DetailsMoviePresenter.swift */; };
 		57820E4E296D9FA10078B38B /* DetailsMovieViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E4D296D9FA10078B38B /* DetailsMovieViewProtocol.swift */; };
 		57820E50296D9FE00078B38B /* DetailsMoviePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E4F296D9FE00078B38B /* DetailsMoviePresenterProtocol.swift */; };
@@ -38,6 +47,7 @@
 		57820E55296E249C0078B38B /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E54296E249C0078B38B /* BaseRouter.swift */; };
 		57820E57296E24CD0078B38B /* MoviesRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57820E56296E24CD0078B38B /* MoviesRouterProtocol.swift */; };
 		57C2EEB029097FEB00042BAB /* DetailsMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C2EEAF29097FEB00042BAB /* DetailsMovieTableViewCell.swift */; };
+		57D22F0C296EEDE10048F374 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57D22F0B296EEDE10048F374 /* KeychainSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +55,6 @@
 		5717CA84290AAE6B00F91218 /* RelatedMoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedMoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		5717CA88290B103700F91218 /* MovieKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieKind.swift; sourceTree = "<group>"; };
 		572DD089290BE3A500D0DA78 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		572DD08B290BE8E400D0DA78 /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		572DD08D290BE91100D0DA78 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		572DD08F290BE94600D0DA78 /* MovieDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetails.swift; sourceTree = "<group>"; };
 		572DD097290C0BCA00D0DA78 /* RecommendationMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationMovie.swift; sourceTree = "<group>"; };
@@ -60,11 +69,19 @@
 		57365CBE2908248B00A72B5C /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		57365CC92908367800A72B5C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		57365CD029094F7900A72B5C /* DetailsMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsMovieViewController.swift; sourceTree = "<group>"; };
+		57384E2B296EF8CE006D964D /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		57384E32296F0020006D964D /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		57384E35296F02A3006D964D /* ImageServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceProtocol.swift; sourceTree = "<group>"; };
+		57384E37296F5E6F006D964D /* StorageKeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageKeyChain.swift; sourceTree = "<group>"; };
+		57384E3A29701E84006D964D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		57384E3D29717C6C006D964D /* KeyFromKeyChainKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFromKeyChainKind.swift; sourceTree = "<group>"; };
+		57384E3F2973EB81006D964D /* ImageApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageApiService.swift; sourceTree = "<group>"; };
+		57384E412973EF67006D964D /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 		57820E3B296C8BD70078B38B /* MoviesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesPresenter.swift; sourceTree = "<group>"; };
 		57820E3E296CA4740078B38B /* AssemblyModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyModuleBuilder.swift; sourceTree = "<group>"; };
 		57820E40296D747C0078B38B /* MoviesViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewProtocol.swift; sourceTree = "<group>"; };
 		57820E42296D753D0078B38B /* MoviesPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesPresenterProtocol.swift; sourceTree = "<group>"; };
-		57820E44296D76BF0078B38B /* UIViewController + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + extension.swift"; sourceTree = "<group>"; };
+		57820E44296D76BF0078B38B /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		57820E49296D9F660078B38B /* DetailsMoviePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsMoviePresenter.swift; sourceTree = "<group>"; };
 		57820E4D296D9FA10078B38B /* DetailsMovieViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsMovieViewProtocol.swift; sourceTree = "<group>"; };
 		57820E4F296D9FE00078B38B /* DetailsMoviePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsMoviePresenterProtocol.swift; sourceTree = "<group>"; };
@@ -79,7 +96,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57D22F0C296EEDE10048F374 /* KeychainSwift in Frameworks */,
 				57820E39296C42060078B38B /* SwiftyJSON in Frameworks */,
+				57384E28296EF6BE006D964D /* Realm in Frameworks */,
+				57384E2A296EF6BE006D964D /* RealmSwift in Frameworks */,
 				57820E36296C40DB0078B38B /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,6 +110,7 @@
 		572DD093290BFEF700D0DA78 /* DetailsMovie */ = {
 			isa = PBXGroup;
 			children = (
+				5736D6ED2974966B0027C839 /* Models */,
 				57820E4C296D9F780078B38B /* View */,
 				57820E4B296D9F6B0078B38B /* Presenter */,
 				572DD094290BFF2100D0DA78 /* Cells */,
@@ -129,8 +150,8 @@
 				57D22F08296E97ED0048F374 /* AssemblyModuleBuilder */,
 				57820E53296E247A0078B38B /* Routers */,
 				57820E46296D76E60078B38B /* Extensions */,
+				57384E39296F6853006D964D /* StorageKeyChain */,
 				57365CC72908366900A72B5C /* Services */,
-				57365CC12908360900A72B5C /* Models */,
 				57365CC22908360E00A72B5C /* Presentation */,
 			);
 			path = Movie;
@@ -150,18 +171,6 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		57365CC12908360900A72B5C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				5717CA88290B103700F91218 /* MovieKind.swift */,
-				572DD08B290BE8E400D0DA78 /* MovieResponse.swift */,
-				572DD08D290BE91100D0DA78 /* Movie.swift */,
-				572DD08F290BE94600D0DA78 /* MovieDetails.swift */,
-				572DD097290C0BCA00D0DA78 /* RecommendationMovie.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		57365CC22908360E00A72B5C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +183,7 @@
 		57365CC32908361C00A72B5C /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				5736D6EC2974963B0027C839 /* Models */,
 				57820E3D296CA3510078B38B /* View */,
 				57820E3A296C8BAA0078B38B /* Presenter */,
 				57365CC42908362D00A72B5C /* Cells */,
@@ -192,18 +202,75 @@
 		57365CC72908366900A72B5C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				57365CC82908366D00A72B5C /* Network */,
+				57384E3C29701E8A006D964D /* DataService */,
+				57365CC82908366D00A72B5C /* NetworkService */,
+				57384E2D296EF963006D964D /* ImageService */,
+				57384E34296F0024006D964D /* Realm */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		57365CC82908366D00A72B5C /* Network */ = {
+		57365CC82908366D00A72B5C /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
 				57365CC92908367800A72B5C /* NetworkService.swift */,
 				572DD089290BE3A500D0DA78 /* NetworkError.swift */,
 			);
-			path = Network;
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		5736D6EC2974963B0027C839 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5717CA88290B103700F91218 /* MovieKind.swift */,
+				572DD08D290BE91100D0DA78 /* Movie.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5736D6ED2974966B0027C839 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				572DD08F290BE94600D0DA78 /* MovieDetails.swift */,
+				572DD097290C0BCA00D0DA78 /* RecommendationMovie.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57384E2D296EF963006D964D /* ImageService */ = {
+			isa = PBXGroup;
+			children = (
+				57384E35296F02A3006D964D /* ImageServiceProtocol.swift */,
+				57384E2B296EF8CE006D964D /* ImageService.swift */,
+				57384E412973EF67006D964D /* FileManagerService.swift */,
+				57384E3F2973EB81006D964D /* ImageApiService.swift */,
+			);
+			path = ImageService;
+			sourceTree = "<group>";
+		};
+		57384E34296F0024006D964D /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				57384E32296F0020006D964D /* Realm.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		57384E39296F6853006D964D /* StorageKeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				57384E37296F5E6F006D964D /* StorageKeyChain.swift */,
+				57384E3D29717C6C006D964D /* KeyFromKeyChainKind.swift */,
+			);
+			path = StorageKeyChain;
+			sourceTree = "<group>";
+		};
+		57384E3C29701E8A006D964D /* DataService */ = {
+			isa = PBXGroup;
+			children = (
+				57384E3A29701E84006D964D /* DataService.swift */,
+			);
+			path = DataService;
 			sourceTree = "<group>";
 		};
 		57820E3A296C8BAA0078B38B /* Presenter */ = {
@@ -227,7 +294,7 @@
 		57820E46296D76E60078B38B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				57820E44296D76BF0078B38B /* UIViewController + extension.swift */,
+				57820E44296D76BF0078B38B /* UIViewController+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -289,6 +356,9 @@
 			packageProductDependencies = (
 				57820E35296C40DB0078B38B /* Alamofire */,
 				57820E38296C42060078B38B /* SwiftyJSON */,
+				57D22F0B296EEDE10048F374 /* KeychainSwift */,
+				57384E27296EF6BE006D964D /* Realm */,
+				57384E29296EF6BE006D964D /* RealmSwift */,
 			);
 			productName = Movie;
 			productReference = 57365CA52907C77700A72B5C /* Movie.app */;
@@ -321,6 +391,8 @@
 			packageReferences = (
 				57820E34296C40DB0078B38B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				57820E37296C42060078B38B /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				57D22F0A296EEDE10048F374 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				57384E26296EF6BE006D964D /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 57365CA62907C77700A72B5C /* Products */;
 			projectDirPath = "";
@@ -363,7 +435,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n\n";
+			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n  exit\nfi\n\n";
 		};
 		57365CBD2907D11D00A72B5C /* Run SwiftFormatter */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -402,19 +474,26 @@
 				57820E4A296D9F660078B38B /* DetailsMoviePresenter.swift in Sources */,
 				57365CD129094F7900A72B5C /* DetailsMovieViewController.swift in Sources */,
 				57820E43296D753D0078B38B /* MoviesPresenterProtocol.swift in Sources */,
-				572DD08C290BE8E400D0DA78 /* MovieResponse.swift in Sources */,
+				57384E3B29701E85006D964D /* DataService.swift in Sources */,
 				5717CA85290AAE6B00F91218 /* RelatedMoviesCollectionViewCell.swift in Sources */,
+				57384E422973EF68006D964D /* FileManagerService.swift in Sources */,
 				57820E57296E24CD0078B38B /* MoviesRouterProtocol.swift in Sources */,
-				57820E45296D76BF0078B38B /* UIViewController + extension.swift in Sources */,
+				57820E45296D76BF0078B38B /* UIViewController+extension.swift in Sources */,
+				57384E33296F0020006D964D /* Realm.swift in Sources */,
 				57820E3F296CA4740078B38B /* AssemblyModuleBuilder.swift in Sources */,
 				57820E41296D747C0078B38B /* MoviesViewProtocol.swift in Sources */,
 				57820E3C296C8BD70078B38B /* MoviesPresenter.swift in Sources */,
 				57820E52296E163E0078B38B /* MoviesRouter.swift in Sources */,
 				572DD08A290BE3A500D0DA78 /* NetworkError.swift in Sources */,
 				57820E50296D9FE00078B38B /* DetailsMoviePresenterProtocol.swift in Sources */,
+				57384E2C296EF8CE006D964D /* ImageService.swift in Sources */,
+				57384E3E29717C6C006D964D /* KeyFromKeyChainKind.swift in Sources */,
 				57365CAB2907C77700A72B5C /* SceneDelegate.swift in Sources */,
 				57C2EEB029097FEB00042BAB /* DetailsMovieTableViewCell.swift in Sources */,
 				572DD098290C0BCA00D0DA78 /* RecommendationMovie.swift in Sources */,
+				57384E38296F5E6F006D964D /* StorageKeyChain.swift in Sources */,
+				57384E36296F02A3006D964D /* ImageServiceProtocol.swift in Sources */,
+				57384E402973EB81006D964D /* ImageApiService.swift in Sources */,
 				572DD08E290BE91100D0DA78 /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,6 +716,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		57384E26296EF6BE006D964D /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		57820E34296C40DB0078B38B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -653,9 +740,27 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		57D22F0A296EEDE10048F374 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift?ref=morioh.com&utm_source=morioh.com";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		57384E27296EF6BE006D964D /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57384E26296EF6BE006D964D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		57384E29296EF6BE006D964D /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57384E26296EF6BE006D964D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		57820E35296C40DB0078B38B /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 57820E34296C40DB0078B38B /* XCRemoteSwiftPackageReference "Alamofire" */;
@@ -665,6 +770,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57820E37296C42060078B38B /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		57D22F0B296EEDE10048F374 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57D22F0A296EEDE10048F374 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

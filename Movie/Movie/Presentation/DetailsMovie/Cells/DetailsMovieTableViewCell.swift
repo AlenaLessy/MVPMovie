@@ -254,16 +254,26 @@ final class DetailsMovieTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configure(_ movie: MovieDetails, networkService: NetworkServiceProtocol) {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        movieNameLabel.text = nil
+        movieDescriptionLabel.text = nil
+        ratingLabel.text = nil
+        currentReleaseDateLabel.text = nil
+        currentTimeLabel.text = nil
+        movieImageView.image = nil
+    }
+
+    func configure(_ movie: MovieDetails, imageService: ImageServiceProtocol) {
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.overview
         ratingLabel.text = movie.rating.description
         currentReleaseDateLabel.text = movie.releaseDate
         currentTimeLabel.text = "\(movie.runtime.description) мин"
+        fetchPhoto(imageService: imageService, urlString: movie.posterPath)
         guard let countriesName = movie.productionCountries.first
         else { return }
         currentCountryIssueLabel.text = countriesName
-        fetchImage(networkService: networkService, urlString: movie.posterPath)
     }
 
     // MARK: - Private Methods
@@ -289,17 +299,12 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         backgroundDescriptionView.addSubview(collectionView)
     }
 
-    private func fetchImage(networkService: NetworkServiceProtocol, urlString: String) {
-        networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case let .success(data):
-                DispatchQueue.main.async {
-                    self.movieImageView.image = UIImage(data: data)
-                }
-            case .failure:
-                print(NetworkError.unknown.description)
-            }
+    private func fetchPhoto(imageService: ImageServiceProtocol, urlString: String) {
+        imageService.fetchPhoto(byUrl: urlString) { [weak self] data in
+            guard let data,
+                  let self
+            else { return }
+            self.movieImageView.image = UIImage(data: data)
         }
     }
 
