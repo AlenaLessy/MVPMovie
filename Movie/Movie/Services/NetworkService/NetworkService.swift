@@ -33,6 +33,10 @@ final class NetworkService: NetworkServiceProtocol {
         static let baseImageIRLString = "https://image.tmdb.org/t/p/w500"
     }
 
+    // MARK: - Private Properties
+
+    private let storageKeyChain = StorageKeyChain()
+
     // MARK: - Public Methods
 
     func fetchMovies(kind: MovieKind, page: Int, completion: ((Result<[Movie], NetworkError>) -> ())?) {
@@ -42,7 +46,7 @@ final class NetworkService: NetworkServiceProtocol {
         }
 
         let parameters = [
-            Constants.queryItemApiKeyName: StorageKeyChain.shared.readValueFromKeyChain(from: .apiKey),
+            Constants.queryItemApiKeyName: storageKeyChain.readValueFromKeyChain(from: .apiKey),
             Constants.queryItemLanguageName: Constants.language,
             Constants.queryItemPageName: page.description
         ]
@@ -72,7 +76,7 @@ final class NetworkService: NetworkServiceProtocol {
         }
 
         let parameters = [
-            Constants.queryItemApiKeyName: StorageKeyChain.shared.readValueFromKeyChain(from: .apiKey),
+            Constants.queryItemApiKeyName: storageKeyChain.readValueFromKeyChain(from: .apiKey),
             Constants.queryItemLanguageName: Constants.language
         ]
 
@@ -101,7 +105,7 @@ final class NetworkService: NetworkServiceProtocol {
         }
 
         let parameters = [
-            Constants.queryItemApiKeyName: StorageKeyChain.shared.readValueFromKeyChain(from: .apiKey),
+            Constants.queryItemApiKeyName: storageKeyChain.readValueFromKeyChain(from: .apiKey),
             Constants.queryItemLanguageName: Constants.language
         ]
 
@@ -109,7 +113,8 @@ final class NetworkService: NetworkServiceProtocol {
             .responseJSON { responseJSON in
                 switch responseJSON.result {
                 case let .success(value):
-                    let response = JSON(value)[Constants.resultsText].arrayValue.map { RecommendationMovie(json: $0) }
+                    let response = JSON(value)[Constants.resultsText].arrayValue
+                        .map { RecommendationMovie(json: $0, id: id) }
                     completion?(.success(response))
                 case .failure:
                     completion?(.failure(.decodingFailure))

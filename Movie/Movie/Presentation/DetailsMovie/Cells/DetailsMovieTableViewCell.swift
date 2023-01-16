@@ -270,7 +270,7 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         ratingLabel.text = movie.rating.description
         currentReleaseDateLabel.text = movie.releaseDate
         currentTimeLabel.text = "\(movie.runtime.description) мин"
-        fetchImage(imageService: imageService, urlString: movie.posterPath)
+        fetchPhoto(imageService: imageService, urlString: movie.posterPath)
         guard let countriesName = movie.productionCountries.first
         else { return }
         currentCountryIssueLabel.text = countriesName
@@ -299,9 +299,12 @@ final class DetailsMovieTableViewCell: UITableViewCell {
         backgroundDescriptionView.addSubview(collectionView)
     }
 
-    private func fetchImage(imageService: ImageServiceProtocol, urlString: String) {
-        imageService.fetchPhoto(byUrl: urlString) { [weak self] image in
-            self?.movieImageView.image = image
+    private func fetchPhoto(imageService: ImageServiceProtocol, urlString: String) {
+        imageService.fetchPhoto(byUrl: urlString) { [weak self] data in
+            guard let data,
+                  let self
+            else { return }
+            self.movieImageView.image = UIImage(data: data)
         }
     }
 

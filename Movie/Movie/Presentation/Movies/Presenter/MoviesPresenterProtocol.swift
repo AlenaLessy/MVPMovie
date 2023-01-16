@@ -13,7 +13,7 @@ protocol MoviesPresenterProtocol: AnyObject {
     var topRatedButtonAlpha: Double { get set }
     var popularButtonAlpha: Double { get set }
     var upcomingButtonAlpha: Double { get set }
-    var dataProvider: DataProviderProtocol { get }
+    var dataProvider: DataServiceProtocol { get }
     var imageService: ImageServiceProtocol { get }
 
     func fetchMovies(_ kind: MovieKind, pagination: Bool)

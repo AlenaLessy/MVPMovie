@@ -7,7 +7,7 @@ import Foundation
 final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
     // MARK: - Public Properties
 
-    let dataProvider: DataProviderProtocol
+    let dataService: DataServiceProtocol
     let imageService: ImageServiceProtocol
 
     weak var view: DetailsMovieViewProtocol?
@@ -20,12 +20,12 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
 
     required init(
         view: DetailsMovieViewProtocol,
-        dataProvider: DataProviderProtocol,
+        dataService: DataServiceProtocol,
         id: Int,
         router: MoviesRouterProtocol, imageService: ImageServiceProtocol
     ) {
         self.view = view
-        self.dataProvider = dataProvider
+        self.dataService = dataService
         self.id = id
         self.router = router
         self.imageService = imageService
@@ -37,7 +37,7 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
 
     func fetchDetailsMovie() {
         guard let id else { return }
-        dataProvider.fetchDetailsMovie(id: id) { [weak self] result in
+        dataService.fetchDetailsMovie(id: id) { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
                 switch result {
@@ -53,7 +53,7 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
 
     func fetchRecommendationMovies() {
         guard let id else { return }
-        dataProvider.fetchRecommendationMovie(id: id) { [weak self] result in
+        dataService.fetchRecommendationMovie(id: id) { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(response):

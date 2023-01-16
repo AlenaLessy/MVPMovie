@@ -27,7 +27,7 @@ class DetailsMovieViewController: UIViewController {
 
     // MARK: Public Properties
 
-    var presenter: DetailsMoviePresenterProtocol!
+    var presenter: DetailsMoviePresenterProtocol?
 
     var updateCollectionViewHandler: (() -> ())?
 
@@ -69,8 +69,10 @@ extension DetailsMovieViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.detailsCellIdentifier)
             as? DetailsMovieTableViewCell else { return UITableViewCell() }
-        guard let model = presenter.movieDetails else { return UITableViewCell() }
-        cell.configure(model, imageService: presenter.imageService)
+        guard let model = presenter?.movieDetails,
+              let imageService = presenter?.imageService
+        else { return UITableViewCell() }
+        cell.configure(model, imageService: imageService)
         cell.collectionView.register(
             RelatedMoviesCollectionViewCell.self,
             forCellWithReuseIdentifier: Constants.relatedCellIdentifier
@@ -92,20 +94,21 @@ extension DetailsMovieViewController: UITableViewDataSource {
 /// UICollectionViewDataSource
 extension DetailsMovieViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        presenter.recommendationMovies.count
+        presenter?.recommendationMovies.count ?? 0
     }
 
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let movie = presenter.recommendationMovies[indexPath.row]
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: Constants.relatedCellIdentifier,
-            for: indexPath
-        ) as? RelatedMoviesCollectionViewCell
+        guard let movie = presenter?.recommendationMovies[indexPath.row],
+              let cell = collectionView.dequeueReusableCell(
+                  withReuseIdentifier: Constants.relatedCellIdentifier,
+                  for: indexPath
+              ) as? RelatedMoviesCollectionViewCell,
+              let imageService = presenter?.imageService
         else { return UICollectionViewCell() }
-        cell.configure(movie, imageService: presenter.imageService)
+        cell.configure(movie, imageService: imageService)
 
         return cell
     }

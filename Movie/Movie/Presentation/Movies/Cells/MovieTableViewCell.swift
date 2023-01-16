@@ -90,7 +90,7 @@ final class MovieTableViewCell: UITableViewCell {
         movieDescriptionLabel.text = movie.overview
         movieRatingLabel.text = movie.rating.description
         guard let urlString = movie.posterPath else { return }
-        fetchImage(imageService: imageService, urlString: urlString)
+        fetchPhoto(imageService: imageService, urlString: urlString)
     }
 
     override func prepareForReuse() {
@@ -110,11 +110,10 @@ final class MovieTableViewCell: UITableViewCell {
         addSubview(movieRatingLabel)
     }
 
-    private func fetchImage(imageService: ImageServiceProtocol, urlString: String) {
-        // loading
-
-        imageService.fetchPhoto(byUrl: urlString) { [weak self] image in
-            self?.movieImageView.image = image
+    private func fetchPhoto(imageService: ImageServiceProtocol, urlString: String) {
+        imageService.fetchPhoto(byUrl: urlString) { [weak self] data in
+            guard let data else { return }
+            self?.movieImageView.image = UIImage(data: data)
         }
     }
 

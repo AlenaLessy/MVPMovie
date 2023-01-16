@@ -6,7 +6,7 @@ import UIKit
 
 /// Протокол для скачивания фото из интернета
 protocol ImageApiServiceProtocol {
-    func fetchPhoto(byUrl url: String, completion: ((UIImage?) -> ())?)
+    func fetchPhoto(byUrl url: String, completion: ((Data?) -> ())?)
 }
 
 /// Сервис для скачивания фото
@@ -19,13 +19,13 @@ final class ImageApiService: ImageApiServiceProtocol {
 
     // MARK: - Public Methods
 
-    func fetchPhoto(byUrl url: String, completion: ((UIImage?) -> ())?) {
+    func fetchPhoto(byUrl url: String, completion: ((Data?) -> ())?) {
         let imageUrl = "\(Constants.baseImageIRLString)\(url)"
         AF.request(imageUrl).responseData(queue: DispatchQueue.global()) { response in
-            guard let data = response.data,
-                  let image = UIImage(data: data) else { return }
+            guard let data = response.data
+            else { return }
             DispatchQueue.main.async {
-                completion?(image)
+                completion?(data)
             }
         }
     }

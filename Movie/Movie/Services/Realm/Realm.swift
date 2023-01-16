@@ -28,6 +28,7 @@ final class RealmService: RealmServiceProtocol {
 
     private enum Constants {
         static let predicateMovieKindValue = "movieKind == %@"
+        static let predicateRecommendationMoviesValue = "id == %@"
     }
 
     // MARK: - Private Properties
@@ -41,7 +42,6 @@ final class RealmService: RealmServiceProtocol {
             do {
                 try self.realm?.write {
                     self.realm?.add(items, update: update)
-                    // self.realm?.add(items)
                 }
             } catch {
                 print(error.localizedDescription)
@@ -67,6 +67,7 @@ final class RealmService: RealmServiceProtocol {
     ) -> Results<T>? {
         let predicate = NSPredicate(format: Constants.predicateMovieKindValue, movieKind.rawValue)
         let objects = realm?.objects(type).filter(predicate)
+        print(realm?.configuration.fileURL)
         return objects
     }
 
@@ -74,7 +75,7 @@ final class RealmService: RealmServiceProtocol {
         id: Int,
         _ type: T.Type
     ) -> T? {
-        let objects = realm?.object(ofType: type, forPrimaryKey: id) ?? nil
+        let objects = realm?.object(ofType: type, forPrimaryKey: id)
         return objects
     }
 
@@ -82,7 +83,8 @@ final class RealmService: RealmServiceProtocol {
         id: Int,
         _ type: T.Type
     ) -> Results<T>? {
-        let objects = realm?.objects(type)
+        let predicate = NSPredicate(format: Constants.predicateRecommendationMoviesValue, String(id))
+        let objects = realm?.objects(type).filter(predicate)
         return objects
     }
 }

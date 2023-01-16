@@ -2,12 +2,12 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
-import UIKit
+import Foundation
 
 /// Протокол кеширования фото
 protocol FileManagerServiceProtocol {
-    func saveImageToCache(url: String, image: UIImage)
-    func getImageFromCache(url: String) -> UIImage?
+    func saveImageToCache(url: String, data: Data)
+    func getImageFromCache(url: String) -> Data?
 }
 
 /// Сервис для кеширования фото
@@ -46,27 +46,25 @@ final class FileManagerService: FileManagerServiceProtocol {
         return pathName
     }()
 
-    private var imagesMap: [String: UIImage] = [:]
-
     // MARK: - Public Methods
 
-    func saveImageToCache(url: String, image: UIImage) {
-        guard let fileName = getFilePath(url: url),
-              let data = image.pngData() else { return }
+    func saveImageToCache(url: String, data: Data) {
+        guard let fileName = getFilePath(url: url) else { return }
         FileManager.default.createFile(atPath: fileName, contents: data, attributes: nil)
     }
 
-    func getImageFromCache(url: String) -> UIImage? {
+    func getImageFromCache(url: String) -> Data? {
         guard let fileName = getFilePath(url: url),
               let info = try? FileManager.default.attributesOfItem(atPath: fileName),
               let modificationDate = info[FileAttributeKey.modificationDate] as? Date
         else { return nil }
         let lifeTime = Date().timeIntervalSince(modificationDate)
-        guard lifeTime <= cacheLifeTime,
-              let image = UIImage(contentsOfFile: fileName)
+        guard lifeTime <= cacheLifeTime
         else { return nil
         }
-        return image
+        let url = URL(filePath: fileName)
+        let data = try? Data(contentsOf: url)
+        return data
     }
 
     // MARK: - Private Methods

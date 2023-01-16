@@ -9,9 +9,11 @@ import SwiftyJSON
 final class RecommendationMovie: Object {
     /// Пусть к постеру фильма
     @Persisted var posterPath: String?
-
-    convenience init(json: JSON) {
+    /// Id фильма для похожих фильмов
+    @Persisted var id: String
+    convenience init(json: JSON, id: Int) {
         self.init()
         posterPath = json["poster_path"].stringValue
+        self.id = String(id)
     }
 }

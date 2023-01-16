@@ -22,7 +22,7 @@ final class Movie: Object {
     @Persisted var page: Int
     /// Общее количество страниц с фильмами
     @Persisted var totalPages: Int
-
+    /// Тип фильма
     @Persisted var movieKind: String
 
     convenience init(json: JSON, page: Int, totalPages: Int, movieKind: MovieKind) {

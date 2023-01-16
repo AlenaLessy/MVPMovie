@@ -15,12 +15,12 @@ final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
 
     func makeMoviesModule(router: MoviesRouterProtocol) -> UIViewController {
         let view = MoviesViewController()
-        let dataProvider = makeDataProvider()
+        let dataService = makeDataService()
 
         let imageService = makeImageService()
         let presenter = MoviesPresenter(
             view: view,
-            dataProvider: dataProvider,
+            dataProvider: dataService,
             router: router,
             imageService: imageService
         )
@@ -30,11 +30,11 @@ final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
 
     func makeDetailsMovieModule(id: Int, router: MoviesRouterProtocol) -> UIViewController {
         let view = DetailsMovieViewController()
-        let dataProvider = makeDataProvider()
+        let dataService = makeDataService()
         let imageService = makeImageService()
         let presenter = DetailsMoviePresenter(
             view: view,
-            dataProvider: dataProvider,
+            dataService: dataService,
             id: id,
             router: router,
             imageService: imageService
@@ -50,10 +50,10 @@ final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
         return imageService
     }
 
-    func makeDataProvider() -> DataProviderProtocol {
+    func makeDataService() -> DataServiceProtocol {
         let networkService = NetworkService()
         let realmService = RealmService()
-        let dataProvider = DataProvider(networkService: networkService, realmService: realmService)
+        let dataProvider = DataService(networkService: networkService, realmService: realmService)
         return dataProvider
     }
 }

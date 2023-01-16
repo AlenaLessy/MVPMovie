@@ -29,7 +29,7 @@
 		57384E33296F0020006D964D /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E32296F0020006D964D /* Realm.swift */; };
 		57384E36296F02A3006D964D /* ImageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E35296F02A3006D964D /* ImageServiceProtocol.swift */; };
 		57384E38296F5E6F006D964D /* StorageKeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E37296F5E6F006D964D /* StorageKeyChain.swift */; };
-		57384E3B29701E85006D964D /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E3A29701E84006D964D /* DataProvider.swift */; };
+		57384E3B29701E85006D964D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E3A29701E84006D964D /* DataService.swift */; };
 		57384E3E29717C6C006D964D /* KeyFromKeyChainKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E3D29717C6C006D964D /* KeyFromKeyChainKind.swift */; };
 		57384E402973EB81006D964D /* ImageApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E3F2973EB81006D964D /* ImageApiService.swift */; };
 		57384E422973EF68006D964D /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57384E412973EF67006D964D /* FileManagerService.swift */; };
@@ -73,7 +73,7 @@
 		57384E32296F0020006D964D /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		57384E35296F02A3006D964D /* ImageServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceProtocol.swift; sourceTree = "<group>"; };
 		57384E37296F5E6F006D964D /* StorageKeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageKeyChain.swift; sourceTree = "<group>"; };
-		57384E3A29701E84006D964D /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		57384E3A29701E84006D964D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		57384E3D29717C6C006D964D /* KeyFromKeyChainKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFromKeyChainKind.swift; sourceTree = "<group>"; };
 		57384E3F2973EB81006D964D /* ImageApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageApiService.swift; sourceTree = "<group>"; };
 		57384E412973EF67006D964D /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
@@ -147,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				57365CC0290835DE00A72B5C /* Application */,
-				57384E3C29701E8A006D964D /* DataProvider */,
 				57D22F08296E97ED0048F374 /* AssemblyModuleBuilder */,
 				57820E53296E247A0078B38B /* Routers */,
 				57820E46296D76E60078B38B /* Extensions */,
@@ -203,6 +202,7 @@
 		57365CC72908366900A72B5C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				57384E3C29701E8A006D964D /* DataService */,
 				57365CC82908366D00A72B5C /* NetworkService */,
 				57384E2D296EF963006D964D /* ImageService */,
 				57384E34296F0024006D964D /* Realm */,
@@ -265,12 +265,12 @@
 			path = StorageKeyChain;
 			sourceTree = "<group>";
 		};
-		57384E3C29701E8A006D964D /* DataProvider */ = {
+		57384E3C29701E8A006D964D /* DataService */ = {
 			isa = PBXGroup;
 			children = (
-				57384E3A29701E84006D964D /* DataProvider.swift */,
+				57384E3A29701E84006D964D /* DataService.swift */,
 			);
-			path = DataProvider;
+			path = DataService;
 			sourceTree = "<group>";
 		};
 		57820E3A296C8BAA0078B38B /* Presenter */ = {
@@ -474,7 +474,7 @@
 				57820E4A296D9F660078B38B /* DetailsMoviePresenter.swift in Sources */,
 				57365CD129094F7900A72B5C /* DetailsMovieViewController.swift in Sources */,
 				57820E43296D753D0078B38B /* MoviesPresenterProtocol.swift in Sources */,
-				57384E3B29701E85006D964D /* DataProvider.swift in Sources */,
+				57384E3B29701E85006D964D /* DataService.swift in Sources */,
 				5717CA85290AAE6B00F91218 /* RelatedMoviesCollectionViewCell.swift in Sources */,
 				57384E422973EF68006D964D /* FileManagerService.swift in Sources */,
 				57820E57296E24CD0078B38B /* MoviesRouterProtocol.swift in Sources */,

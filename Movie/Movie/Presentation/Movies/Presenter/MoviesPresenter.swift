@@ -15,7 +15,7 @@ final class MoviesPresenter: MoviesPresenterProtocol {
 
     // MARK: - Public Properties
 
-    let dataProvider: DataProviderProtocol
+    let dataProvider: DataServiceProtocol
     let imageService: ImageServiceProtocol
 
     weak var view: MoviesViewProtocol?
@@ -34,7 +34,7 @@ final class MoviesPresenter: MoviesPresenterProtocol {
 
     required init(
         view: MoviesViewProtocol,
-        dataProvider: DataProviderProtocol,
+        dataProvider: DataServiceProtocol,
         router: MoviesRouterProtocol,
         imageService: ImageServiceProtocol
     ) {

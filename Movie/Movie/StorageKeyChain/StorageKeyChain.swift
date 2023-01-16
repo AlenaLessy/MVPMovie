@@ -4,7 +4,14 @@
 import Foundation
 import KeychainSwift
 
-final class StorageKeyChain {
+/// Протокол хранилища ключей
+protocol StorageKeyChainProtocol {
+    func safeValueToKeyChain(key: KeyFromKeyChainKind, value: String)
+    func readValueFromKeyChain(from key: KeyFromKeyChainKind) -> String
+}
+
+/// Хранилище ключей
+final class StorageKeyChain: StorageKeyChainProtocol {
     // MARK: - Private Constants
 
     private enum Constants {
@@ -17,11 +24,6 @@ final class StorageKeyChain {
 
     private let apiKeyValue = Bundle.main.infoDictionary?[Constants.apiKeyName] as? String
     private let keyChain = KeychainSwift()
-    static let shared = StorageKeyChain()
-
-    // MARK: - Initializers
-
-    private init() {}
 
     // MARK: - Public Methods
 

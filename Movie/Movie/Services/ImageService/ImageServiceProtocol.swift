@@ -3,7 +3,7 @@
 
 import UIKit
 
-/// Протокол для загрузки и кеширования изображений
+/// Протокол сервиса изображений
 protocol ImageServiceProtocol {
-    func fetchPhoto(byUrl url: String, completion: ((UIImage?) -> ())?)
+    func fetchPhoto(byUrl url: String, completion: ((Data?) -> ())?)
 }
