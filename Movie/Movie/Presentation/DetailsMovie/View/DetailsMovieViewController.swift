@@ -29,6 +29,8 @@ class DetailsMovieViewController: UIViewController {
 
     var presenter: DetailsMoviePresenterProtocol!
 
+    var updateCollectionViewHandler: (() -> ())?
+
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
@@ -68,11 +70,15 @@ extension DetailsMovieViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.detailsCellIdentifier)
             as? DetailsMovieTableViewCell else { return UITableViewCell() }
         guard let model = presenter.movieDetails else { return UITableViewCell() }
-        cell.configure(model, networkService: presenter.networkService)
+        cell.configure(model, imageService: presenter.imageService)
         cell.collectionView.register(
             RelatedMoviesCollectionViewCell.self,
             forCellWithReuseIdentifier: Constants.relatedCellIdentifier
         )
+
+        updateCollectionViewHandler = {
+            cell.collectionView.reloadData()
+        }
         cell.collectionView.dataSource = self
         cell.collectionView.delegate = self
         return cell
@@ -93,13 +99,14 @@ extension DetailsMovieViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let model = presenter.recommendationMovies[indexPath.row]
+        let movie = presenter.recommendationMovies[indexPath.row]
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Constants.relatedCellIdentifier,
             for: indexPath
         ) as? RelatedMoviesCollectionViewCell
         else { return UICollectionViewCell() }
-        cell.configure(model, networkService: presenter.networkService)
+        cell.configure(movie, imageService: presenter.imageService)
+
         return cell
     }
 }
@@ -117,6 +124,10 @@ extension DetailsMovieViewController: UICollectionViewDelegateFlowLayout {
 
 /// DetailsMovieViewProtocol
 extension DetailsMovieViewController: DetailsMovieViewProtocol {
+    func reloadCollectionView() {
+        updateCollectionViewHandler?()
+    }
+
     func reloadTableView() {
         tableView.reloadData()
     }

@@ -2,7 +2,8 @@
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
-///
+
+/// Сцена
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 

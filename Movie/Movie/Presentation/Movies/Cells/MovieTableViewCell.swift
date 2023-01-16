@@ -85,12 +85,20 @@ final class MovieTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configure(movie: Movie, networkService: NetworkServiceProtocol) {
+    func configure(movie: Movie, imageService: ImageServiceProtocol) {
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.overview
         movieRatingLabel.text = movie.rating.description
         guard let urlString = movie.posterPath else { return }
-        fetchImage(networkService: networkService, urlString: urlString)
+        fetchImage(imageService: imageService, urlString: urlString)
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        movieNameLabel.text = nil
+        movieDescriptionLabel.text = nil
+        movieRatingLabel.text = nil
+        movieImageView.image = nil
     }
 
     // MARK: - Private Methods
@@ -102,18 +110,25 @@ final class MovieTableViewCell: UITableViewCell {
         addSubview(movieRatingLabel)
     }
 
-    private func fetchImage(networkService: NetworkServiceProtocol, urlString: String) {
-        networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case let .success(data):
-                DispatchQueue.main.async {
-                    self.movieImageView.image = UIImage(data: data)
-                }
-            case .failure:
-                print(NetworkError.unknown.description)
-            }
+    private func fetchImage(imageService: ImageServiceProtocol, urlString: String) {
+        // loading
+
+        imageService.fetchPhoto(byUrl: urlString) { [weak self] image in
+            self?.movieImageView.image = image
+            // disable loading
         }
+
+//        networkService.fetchImage(imageUrlPath: urlString) { [weak self] result in
+//            guard let self else { return }
+//            switch result {
+//            case let .success(data):
+//                DispatchQueue.main.async {
+//                    self.movieImageView.image = UIImage(data: data)
+//                }
+//            case .failure:
+//                print(NetworkError.unknown.description)
+//            }
+//        }
     }
 
     // MARK: - Constrains

@@ -15,7 +15,8 @@ final class MoviesPresenter: MoviesPresenterProtocol {
 
     // MARK: - Public Properties
 
-    let networkService: NetworkServiceProtocol
+    let dataProvider: DataProviderProtocol
+    var imageService: ImageServiceProtocol
 
     weak var view: MoviesViewProtocol?
 
@@ -31,10 +32,16 @@ final class MoviesPresenter: MoviesPresenterProtocol {
 
     // MARK: - Initializers
 
-    required init(view: MoviesViewProtocol, networkService: NetworkServiceProtocol, router: MoviesRouterProtocol) {
+    required init(
+        view: MoviesViewProtocol,
+        dataProvider: DataProviderProtocol,
+        router: MoviesRouterProtocol,
+        imageService: ImageServiceProtocol
+    ) {
         self.view = view
-        self.networkService = networkService
+        self.dataProvider = dataProvider
         self.router = router
+        self.imageService = imageService
         fetchMovies(.topRated)
     }
 
@@ -44,22 +51,20 @@ final class MoviesPresenter: MoviesPresenterProtocol {
         isLoading = true
         view?.startActivityIndicator()
         page = pagination ? page + Constants.one : page
-        networkService.fetchMovies(kind: kind, page: page) { [weak self] result in
+        dataProvider.fetchMovies(kind: kind, page: page) { [weak self] result in
             guard let self else { return }
             self.isLoading = false
             DispatchQueue.main.async {
                 self.view?.stopActivityIndicatorAndRefreshControl()
             }
-            switch result {
-            case let .success(response):
-                self.page = response.page
-                self.totalPages = response.totalPages
-                self.movies = pagination ? (self.movies ?? []) + response.movies : response.movies
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(response):
+                    self.page = response.first?.page ?? 0
+                    self.totalPages = response.first?.totalPages ?? 0
+                    self.movies = pagination ? (self.movies ?? []) + response : response
                     self.view?.reloadTableView()
-                }
-            case .failure:
-                DispatchQueue.main.async {
+                case .failure:
                     self.view?.failure()
                 }
             }

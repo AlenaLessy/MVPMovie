@@ -7,44 +7,44 @@ import Foundation
 final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
     // MARK: - Public Properties
 
-    let networkService: NetworkServiceProtocol
+    let dataProvider: DataProviderProtocol
+    let imageService: ImageServiceProtocol
 
     weak var view: DetailsMovieViewProtocol?
     var router: MoviesRouterProtocol?
     var movieDetails: MovieDetails?
-    var movieId: Int?
+    var id: Int?
     var recommendationMovies: [RecommendationMovie] = []
 
     // MARK: - Initializers
 
     required init(
         view: DetailsMovieViewProtocol,
-        networkService: NetworkServiceProtocol,
-        movieId: Int,
-        router: MoviesRouterProtocol
+        dataProvider: DataProviderProtocol,
+        id: Int,
+        router: MoviesRouterProtocol, imageService: ImageServiceProtocol
     ) {
         self.view = view
-        self.networkService = networkService
-        self.movieId = movieId
+        self.dataProvider = dataProvider
+        self.id = id
         self.router = router
+        self.imageService = imageService
         fetchRecommendationMovies()
-        fetchMovieDetails()
+        fetchDetailsMovie()
     }
 
     // MARK: - Public Methods
 
-    func fetchMovieDetails() {
-        guard let movieId else { return }
-        networkService.fetchMovie(id: movieId) { [weak self] result in
+    func fetchDetailsMovie() {
+        guard let id else { return }
+        dataProvider.fetchDetailsMovie(id: id) { [weak self] result in
             guard let self else { return }
-            switch result {
-            case .failure:
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case .failure:
                     self.view?.failure()
-                }
-            case let .success(movieDetails):
-                self.movieDetails = movieDetails
-                DispatchQueue.main.async {
+                case let .success(movieDetails):
+                    self.movieDetails = movieDetails
                     self.view?.reloadTableView()
                 }
             }
@@ -52,13 +52,14 @@ final class DetailsMoviePresenter: DetailsMoviePresenterProtocol {
     }
 
     func fetchRecommendationMovies() {
-        guard let movieId else { return }
-        networkService.fetchRecommendationsMovie(id: movieId) { [weak self] result in
+        guard let id else { return }
+        dataProvider.fetchRecommendationMovie(id: id) { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(response):
                 self.recommendationMovies = response
                 DispatchQueue.main.async {
+                    self.view?.reloadCollectionView()
                     self.view?.reloadTableView()
                 }
             case .failure:

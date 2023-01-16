@@ -222,7 +222,7 @@ extension MoviesViewController: UITableViewDataSource {
             as? MovieTableViewCell,
             let movie = presenter.movies?[indexPath.row]
         else { return UITableViewCell() }
-        cell.configure(movie: movie, networkService: presenter.networkService)
+        cell.configure(movie: movie, imageService: presenter.imageService)
         return cell
     }
 

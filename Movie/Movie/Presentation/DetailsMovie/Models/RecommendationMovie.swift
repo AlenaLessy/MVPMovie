@@ -2,14 +2,16 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
+import RealmSwift
 import SwiftyJSON
 
 /// Модель рекомендованного фильма
-struct RecommendationMovie {
+final class RecommendationMovie: Object {
     /// Пусть к постеру фильма
-    let posterPath: String?
+    @Persisted var posterPath: String?
 
-    init(json: JSON) {
+    convenience init(json: JSON) {
+        self.init()
         posterPath = json["poster_path"].stringValue
     }
 }
