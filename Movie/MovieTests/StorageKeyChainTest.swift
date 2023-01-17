@@ -8,6 +8,13 @@ import XCTest
 
 /// Тест кей чейн сервиса
 final class StorageKeyChainTest: XCTestCase {
+    
+    // Private Constants
+    private enum Constants {
+        static let valueText = "foo"
+        static let emptyString = ""
+    }
+    
     // MARK: - Private Properties
 
     private var storageKeyChainService: StorageKeyChainProtocol?
@@ -19,13 +26,13 @@ final class StorageKeyChainTest: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        storageKeyChainService?.safeValueToKeyChain(key: .apiKey, value: "")
+        storageKeyChainService?.safeValueToKeyChain(key: .apiKey, value: Constants.emptyString)
         storageKeyChainService = nil
     }
 
     func testReadValueFromKeyChain() {
-        storageKeyChainService?.safeValueToKeyChain(key: .apiKey, value: "baz")
+        storageKeyChainService?.safeValueToKeyChain(key: .apiKey, value: Constants.valueText)
         let value = storageKeyChainService?.readValueFromKeyChain(from: .apiKey)
-        XCTAssertEqual("baz", value)
+        XCTAssertEqual(Constants.valueText, value)
     }
 }
