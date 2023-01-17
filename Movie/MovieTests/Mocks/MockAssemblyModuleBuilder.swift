@@ -4,7 +4,7 @@
 @testable import Movie
 import UIKit
 
-///
+/// Мок сборщика модулей
 final class MockAssemblyModuleBuilder: AssemblyBuilderProtocol {
     // MARK: - Public Methods
 

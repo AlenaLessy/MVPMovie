@@ -4,6 +4,7 @@
 @testable import Movie
 import UIKit
 
+/// Мок навигационного контроллера
 final class MockNavigationController: UINavigationController {
     // MARK: - Public Properties
 

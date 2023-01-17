@@ -4,6 +4,7 @@
 @testable import Movie
 import UIKit
 
+/// Мок роутера фильмов
 final class MockMoviesRouter: MoviesRouterProtocol {
     // MARK: - Public Properties
 
