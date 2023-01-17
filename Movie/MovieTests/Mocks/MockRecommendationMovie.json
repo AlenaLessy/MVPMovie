@@ -1,0 +1,431 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "/rjhBDUPWWRlbiEcpEyqYBMkQSps.jpg",
+            "id": 949423,
+            "title": "Pearl",
+            "original_language": "en",
+            "original_title": "Pearl",
+            "overview": "Trapped on her family’s isolated farm, Pearl must tend to her ailing father under the bitter and overbearing watch of her devout mother. Lusting for a glamorous life like she’s seen in the movies, Pearl’s ambitions, temptations, and repressions collide.",
+            "poster_path": "/ulBLIBqvdnf4H6JBt0OpMCU1ECn.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                27
+            ],
+            "popularity": 59.502,
+            "release_date": "2022-09-16",
+            "video": false,
+            "vote_average": 7.395,
+            "vote_count": 428
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/21ldFAokKVjwzi1SHXoPb5gc7md.jpg",
+            "id": 760104,
+            "title": "X",
+            "original_language": "en",
+            "original_title": "X",
+            "overview": "In 1979, a group of young filmmakers set out to make an adult film in rural Texas, but when their reclusive, elderly hosts catch them in the act, the cast find themselves fighting for their lives. Hilarity ensues.",
+            "poster_path": "/woTQx9Q4b8aO13jR9dsj8C9JESy.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                27,
+                9648,
+                53
+            ],
+            "popularity": 189.44,
+            "release_date": "2022-03-18",
+            "video": false,
+            "vote_average": 6.781,
+            "vote_count": 1559
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg",
+            "id": 436270,
+            "title": "Black Adam",
+            "original_language": "en",
+            "original_title": "Black Adam",
+            "overview": "Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods—and imprisoned just as quickly—Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world.",
+            "poster_path": "/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                14,
+                28,
+                878
+            ],
+            "popularity": 2030.075,
+            "release_date": "2022-10-21",
+            "video": false,
+            "vote_average": 7.217,
+            "vote_count": 3717
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/yYrvN5WFeGYjJnRzhY0QXuo4Isw.jpg",
+            "id": 505642,
+            "title": "Black Panther: Wakanda Forever",
+            "original_language": "en",
+            "original_title": "Black Panther: Wakanda Forever",
+            "overview": "Queen Ramonda, Shuri, M’Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers in the wake of King T’Challa’s death. As the Wakandans strive to embrace their next chapter, the heroes must band together with the help of War Dog Nakia and Everett Ross and forge a new path for the kingdom of Wakanda.",
+            "poster_path": "/sv1xJUazXeYqALzczSZ3O6nkH75.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                28,
+                12,
+                878
+            ],
+            "popularity": 1442.235,
+            "release_date": "2022-11-11",
+            "video": false,
+            "vote_average": 7.469,
+            "vote_count": 1630
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/bUjPcNS8GweBh5Nxp8oq9Dy712Z.jpg",
+            "id": 913290,
+            "title": "Barbarian",
+            "original_language": "en",
+            "original_title": "Barbarian",
+            "overview": "In town for a job interview, a young woman arrives at her Airbnb late at night only to find that it has been mistakenly double-booked and a strange man is already staying there. Against her better judgement, she decides to stay the night anyway.",
+            "poster_path": "/idT5mnqPcJgSkvpDX7pJffBzdVH.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                27,
+                53
+            ],
+            "popularity": 128.157,
+            "release_date": "2022-09-08",
+            "video": false,
+            "vote_average": 6.919,
+            "vote_count": 1100
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/y8UJI2Vrbsi4rpJzTrjSNn4mmzS.jpg",
+            "id": 873571,
+            "title": "Amber Сops",
+            "original_language": "uk",
+            "original_title": "Бурштинові копи",
+            "overview": "Patrolman Maksym, who had dreamed of following law and order since childhood, was unexpectedly transferred from Kyiv to a small village in the Zhytomyr Region. There, the metropolitan policeman and his new partner Bohdan challenge the amber mafia. Will Max be able to find common ground with the colorful local cops and defeat the omnipotent Amber Baron? But this is not the only problem of a brave patrolman, who still needs to regain the trust of his beloved girl.",
+            "poster_path": "/vQmJgNYhzHlmCjxOo76KUrNN6pP.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                35
+            ],
+            "popularity": 1.15,
+            "release_date": "2021-10-07",
+            "video": false,
+            "vote_average": 6.5,
+            "vote_count": 2
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/wSILunFEbvw00Ql2aaMHCSZf3cI.jpg",
+            "id": 724495,
+            "title": "The Woman King",
+            "original_language": "en",
+            "original_title": "The Woman King",
+            "overview": "The story of the Agojie, the all-female unit of warriors who protected the African Kingdom of Dahomey in the 1800s with skills and a fierceness unlike anything the world has ever seen, and General Nanisca as she trains the next generation of recruits and readies them for battle against an enemy determined to destroy their way of life.",
+            "poster_path": "/438QXt1E3WJWb3PqNniK0tAE5c1.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                28,
+                18,
+                36
+            ],
+            "popularity": 1643.371,
+            "release_date": "2022-09-16",
+            "video": false,
+            "vote_average": 7.846,
+            "vote_count": 1051
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/b2FxWOxe9K7ZZ1uaPOze2RJ1ajq.jpg",
+            "id": 675054,
+            "title": "MexZombies",
+            "original_language": "es",
+            "original_title": "MexZombies",
+            "overview": "A group of teenagers must face a zombie apocalypse, and help reestablish order.",
+            "poster_path": "/pTxw4GFE3ZfzJfvuUsPyD5njAuI.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                27,
+                28,
+                35
+            ],
+            "popularity": 318.682,
+            "release_date": "2022-10-26",
+            "video": false,
+            "vote_average": 7.139,
+            "vote_count": 119
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/akYTfFvYkFGJReFxXM841NidlAa.jpg",
+            "id": 1033107,
+            "title": "Wild Is the Wind",
+            "original_language": "en",
+            "original_title": "Wild Is the Wind",
+            "overview": "When two corrupt police officers investigate the brutal murder of a young girl, tensions come to a head in their small, racially-segregated town.",
+            "poster_path": "/rITxQBtnMpneZf8QzH1dqONQocx.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                80,
+                18
+            ],
+            "popularity": 179.942,
+            "release_date": "2022-10-28",
+            "video": false,
+            "vote_average": 5.723,
+            "vote_count": 47
+        },
+        {
+            "adult": false,
+            "backdrop_path": null,
+            "id": 198508,
+            "title": "Woman Between Wolf and Dog",
+            "original_language": "nl",
+            "original_title": "Een vrouw tussen hond en wolf",
+            "overview": "Lieve is a Belgian woman who marries just as World War II is beginning. When the Germans invade, her husband goes off to fight them, but he swiftly returns home after the invasion succeeds. Later, he decides that the Germans are on the right side of things, and goes off to fight for them on the Eastern Front. Soon afterward, a resistance fighter is stranded on her doorway, and she hides him. The two of them fall in love, and the conflicts and joys of this relationship cause Lieve continued grief well after the end of the war.",
+            "poster_path": "/pSYWYP8m2d8BlVBjSpAaHpDeeA5.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                18,
+                10749,
+                10752
+            ],
+            "popularity": 0.913,
+            "release_date": "1979-06-04",
+            "video": false,
+            "vote_average": 5.643,
+            "vote_count": 7
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/f3UakemV62FxEgzmQcrxGISbMaW.jpg",
+            "id": 852427,
+            "title": "Kompromat",
+            "original_language": "fr",
+            "original_title": "Kompromat",
+            "overview": "Mathieu, a member of the French institute in Irkutsk, is arrested overnight by the Russian authorities.  Imprisoned and accused of sexual abuse on his own daughter, he realises he is a victim of a Kompromat. With the help of the FSB, someone has built up a case to frame him. Isolated, he has no one to turn to. Proving his innocence is impossible: the only solution is to escape.",
+            "poster_path": "/gRc616kqniBfdMV1h97oBkNxyKZ.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                53,
+                18
+            ],
+            "popularity": 10.66,
+            "release_date": "2022-09-07",
+            "video": false,
+            "vote_average": 6.407,
+            "vote_count": 81
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/syKiIOqEoOi1Hb0Oh0n9cImcBab.jpg",
+            "id": 756999,
+            "title": "The Black Phone",
+            "original_language": "en",
+            "original_title": "The Black Phone",
+            "overview": "Finney Blake, a shy but clever 13-year-old boy, is abducted by a sadistic killer and trapped in a soundproof basement where screaming is of little use. When a disconnected phone on the wall begins to ring, Finney discovers that he can hear the voices of the killer’s previous victims. And they are dead set on making sure that what happened to them doesn’t happen to Finney.",
+            "poster_path": "/lr11mCT85T1JanlgjMuhs9nMht4.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                27,
+                53
+            ],
+            "popularity": 260.848,
+            "release_date": "2022-06-22",
+            "video": false,
+            "vote_average": 7.806,
+            "vote_count": 3387
+        },
+        {
+            "adult": false,
+            "backdrop_path": null,
+            "id": 485470,
+            "title": "Nice Sister-In-Law 2",
+            "original_language": "ko",
+            "original_title": "착한 형수2",
+            "overview": "If you give it once, a good brother-in-law who gives everything generously will come!  At the house of her girlfriend Jin-kyung, who lives with pumice stone, her brother and his wife suddenly visit and the four of them live together. At first, Kyung-seok, who was burdened by his girlfriend's brother, began to keep his eyes on his wife, Yeon-su. A bold brother-in-law who walks around in no-bra and panties without hesitation even at his sister-in-law's house. Besides, from a certain moment, he starts to send a hand of temptation to Pyeong-seok first...",
+            "poster_path": "/3pEs4hmeHvTAsmx09whEaPDOQpq.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                10749
+            ],
+            "popularity": 89.909,
+            "release_date": "2017-10-08",
+            "video": false,
+            "vote_average": 5.2,
+            "vote_count": 4
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/au4HUSWDRadIcl9CqySlw1kJMfo.jpg",
+            "id": 829799,
+            "title": "Paradise City",
+            "original_language": "en",
+            "original_title": "Paradise City",
+            "overview": "Renegade bounty hunter Ryan Swan must carve his way through the Hawaiian crime world to wreak vengeance on the kingpin who murdered his father.",
+            "poster_path": "/xdmmd437QdjcCls8yCQxrH5YYM4.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                28,
+                80,
+                53
+            ],
+            "popularity": 376.622,
+            "release_date": "2022-11-11",
+            "video": false,
+            "vote_average": 5.546,
+            "vote_count": 54
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/aTovumsNlDjof7YVoU5nW2RHaYn.jpg",
+            "id": 616820,
+            "title": "Halloween Ends",
+            "original_language": "en",
+            "original_title": "Halloween Ends",
+            "overview": "Four years after the events of Halloween in 2018, Laurie has decided to liberate herself from fear and rage and embrace life. But when a young man is accused of killing a boy he was babysitting, it ignites a cascade of violence and terror that will force Laurie to finally confront the evil she can’t control, once and for all.",
+            "poster_path": "/yoAKHpveZ4Z1wwwXoD31dXj3H8s.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                27,
+                53
+            ],
+            "popularity": 143.895,
+            "release_date": "2022-10-12",
+            "video": false,
+            "vote_average": 6.428,
+            "vote_count": 1110
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/3ibGaDmgTdXY448ENZmtHEmhP6o.jpg",
+            "id": 619730,
+            "title": "Don't Worry Darling",
+            "original_language": "en",
+            "original_title": "Don't Worry Darling",
+            "overview": "Alice and Jack are lucky to be living in the idealized community of Victory, the experimental company town housing the men who work for the top-secret Victory Project and their families. But when cracks in their idyllic life begin to appear, exposing flashes of something much more sinister lurking beneath the attractive façade, Alice can’t help questioning exactly what they’re doing in Victory, and why.",
+            "poster_path": "/jOqxKIOC92BVyinYO1Fm73XY7Tc.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                53,
+                9648,
+                878
+            ],
+            "popularity": 114.167,
+            "release_date": "2022-09-23",
+            "video": false,
+            "vote_average": 6.872,
+            "vote_count": 1269
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/kZY6JbihG9lqiOpYqU33XGfI4PW.jpg",
+            "id": 11569,
+            "title": "Hellraiser III: Hell on Earth",
+            "original_language": "en",
+            "original_title": "Hellraiser III: Hell on Earth",
+            "overview": "Pinhead is trapped in the Pillar of Souls. Fortunately for him it is bought by a young playboy who owns his own nightclub. Pinhead busies himself escaping by getting the playboy to lure victims to his presence so he can use their blood. Once free, he seeks to destroy the puzzle box so he need never return to Hell, but a female reporter is investigating the grisly murders and stands in his way.",
+            "poster_path": "/eBKrmVD29BQGDlWQJ3rKS8cmPGh.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                27
+            ],
+            "popularity": 16.844,
+            "release_date": "1992-09-11",
+            "video": false,
+            "vote_average": 5.7,
+            "vote_count": 606
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/hNKtKpQIU502t3r3DAFKgsWIZ9v.jpg",
+            "id": 18214,
+            "title": "Black Eagle",
+            "original_language": "en",
+            "original_title": "Black Eagle",
+            "overview": "One of the US Air Force's most modern tactical aircrafts, an F-100 with a new laser guidance system, crashes into the sea near Malta - a region where the Soviet forces are highly present, too. The CIA immediately sends out their best secret agent, Ken Tani, to salvage the system before it falls into enemy hands. To ensure his loyalty, they bring his two young sons to a nearby hotel on the island.",
+            "poster_path": "/hMm9hIhErPcgONWknYBgfQP2Z00.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                28,
+                18
+            ],
+            "popularity": 11.652,
+            "release_date": "1988-05-01",
+            "video": false,
+            "vote_average": 4.99,
+            "vote_count": 194
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/cRdA9xjHBbobw4LJFsQ3j1CgpVq.jpg",
+            "id": 663712,
+            "title": "Terrifier 2",
+            "original_language": "en",
+            "original_title": "Terrifier 2",
+            "overview": "After being resurrected by a sinister entity, Art the Clown returns to Miles County where he must hunt down and destroy a teenage girl and her younger brother on Halloween night.  As the body count rises, the siblings fight to stay alive while uncovering the true nature of Art's evil intent.",
+            "poster_path": "/8gLhu8UFPZfH2Hv11JhTZkb9CVl.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                27
+            ],
+            "popularity": 949.668,
+            "release_date": "2022-10-06",
+            "video": false,
+            "vote_average": 6.969,
+            "vote_count": 895
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/itcAHIwxKvSkFEVUsqSpOEIRwZy.jpg",
+            "id": 414419,
+            "title": "Kill Bill: The Whole Bloody Affair",
+            "original_language": "en",
+            "original_title": "Kill Bill: The Whole Bloody Affair",
+            "overview": "An assassin is shot and almost killed by her ruthless employer, Bill, and other members of their assassination circle – but she lives to plot her vengeance.  Kill Bill: The Whole Bloody Affair is a complete edit of the two-part martial arts action films Kill Bill: Vol. 1 and Kill Bill: Vol. 2. The film was originally scheduled to be released as one part. However, due to the film's over 4 hour running time, it was split into two parts.",
+            "poster_path": "/zomX76Pf3nUaTzRBk5BveLk1QPu.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                28,
+                80,
+                53
+            ],
+            "popularity": 18.624,
+            "release_date": "2011-03-27",
+            "video": false,
+            "vote_average": 7.955,
+            "vote_count": 825
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/3njpnE3SUxqjtzbSmEsBl1vF9lR.jpg",
+            "id": 634301,
+            "title": "Captors",
+            "original_language": "en",
+            "original_title": "Captors",
+            "overview": "Alys - a human trafficking victim who narrowly escaped her captors ten years ago - confronts her traumatic past when a relative leaves her his remote, snowbound mansion. Although the new house first presents the promise of a new chapter in her life, Alys is soon besieged by strange hallucinations and deadly adversaries and must fight to survive while keeping her sanity intact.",
+            "poster_path": "/uw2F92plA1brk5CFZrhzJ6VrY8R.jpg",
+            "media_type": "movie",
+            "genre_ids": [
+                27,
+                53
+            ],
+            "popularity": 2.007,
+            "release_date": "2022-05-24",
+            "video": false,
+            "vote_average": 3.833,
+            "vote_count": 6
+        }
+    ],
+    "total_pages": 2,
+    "total_results": 40
+}

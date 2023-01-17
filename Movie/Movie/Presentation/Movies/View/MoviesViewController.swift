@@ -23,6 +23,8 @@ final class MoviesViewController: UIViewController {
         static let angel = 180.0
         static let tableViewRowAnimateDurationValue = 0.15
         static let tableViewRowAnimateDelayValue = 0.15
+        static let moviesTableViewIdentifier = "Movies"
+        static let cellIdentifier = "cellIdentifier"
     }
 
     private enum ConstantsOfConstraint {
@@ -96,6 +98,7 @@ final class MoviesViewController: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.refreshControl = refreshControl
+        tableView.accessibilityIdentifier = Constants.moviesTableViewIdentifier
         return tableView
     }()
 
@@ -223,6 +226,7 @@ extension MoviesViewController: UITableViewDataSource {
             let movie = presenter.movies?[indexPath.row]
         else { return UITableViewCell() }
         cell.configure(movie: movie, imageService: presenter.imageService)
+        cell.accessibilityIdentifier = "\(Constants.cellIdentifier)\(indexPath.row)"
         return cell
     }
 
