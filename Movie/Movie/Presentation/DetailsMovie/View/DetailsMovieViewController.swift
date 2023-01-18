@@ -15,6 +15,8 @@ class DetailsMovieViewController: UIViewController {
         static let alertActionTitleText = "Ok"
         static let sizeForItemAtWidthValue = 150
         static let sizeForItemAtHeightValue = 200
+        static let detailsMovieTableViewIdentifier = "DetailsMovie"
+        static let cellIdentifier = "cellIdentifier"
     }
 
     // MARK: - Private Outlets
@@ -45,6 +47,7 @@ class DetailsMovieViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(DetailsMovieTableViewCell.self, forCellReuseIdentifier: Constants.detailsCellIdentifier)
         tableView.showsVerticalScrollIndicator = false
+        tableView.accessibilityIdentifier = Constants.detailsMovieTableViewIdentifier
     }
 
     // MARK: - Constrains
@@ -73,6 +76,7 @@ extension DetailsMovieViewController: UITableViewDataSource {
               let imageService = presenter?.imageService
         else { return UITableViewCell() }
         cell.configure(model, imageService: imageService)
+        cell.accessibilityIdentifier = "\(Constants.cellIdentifier)\(indexPath.row)"
         cell.collectionView.register(
             RelatedMoviesCollectionViewCell.self,
             forCellWithReuseIdentifier: Constants.relatedCellIdentifier

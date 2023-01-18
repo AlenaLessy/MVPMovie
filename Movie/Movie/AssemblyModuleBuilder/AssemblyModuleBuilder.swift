@@ -7,6 +7,8 @@ import UIKit
 protocol AssemblyBuilderProtocol {
     func makeMoviesModule(router: MoviesRouterProtocol) -> UIViewController
     func makeDetailsMovieModule(id: Int, router: MoviesRouterProtocol) -> UIViewController
+    func makeImageService() -> ImageServiceProtocol
+    func makeDataService() -> DataServiceProtocol
 }
 
 /// Составление модулей

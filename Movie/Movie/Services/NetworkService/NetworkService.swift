@@ -103,7 +103,6 @@ final class NetworkService: NetworkServiceProtocol {
             completion?(.failure(.urlFailure))
             return
         }
-
         let parameters = [
             Constants.queryItemApiKeyName: storageKeyChain.readValueFromKeyChain(from: .apiKey),
             Constants.queryItemLanguageName: Constants.language
